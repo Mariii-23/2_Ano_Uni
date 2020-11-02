@@ -1,0 +1,55 @@
+Invariantes (em Dafny): 
+3b) 
+
+method Main(x:int) returns (r:int) 
+  requires x >= 0
+  ensures r == x*x
+  {
+       
+  var p:= 1;
+   r := 0;
+  var i := 0;
+  while (i<x) 
+  invariant r == i*i
+  invariant p == i+i+1
+  invariant i <= x{
+    i := i+1; r := r+p; p := p+2;
+    }
+}
+
+4) I (invariante): k <= N && k >= 0 && Qualquer (0 <=i <= k) v[k] != x
+Porque: I && ¬c => Pós-condição
+
+
+5b)
+function Factorial(n: int): int
+  requires n >= 0 
+{
+  if n == 0 then 1   
+  else 
+  
+  if n == 1 then 1 else n * Factorial(n - 1)
+  
+}
+
+6b) Invariante: i<= N+1 && (i== 0 ==> r== 0) && (i!= 0 ==> r= sum(k= 0 até i- 1) a[k]* x^(i- k- 1)
+6c)
+Invariante: (i == N -> r == 0) && (i != N -> Sum (ii = N até i) a[ii] * x^(N-ii) ) && (i >= -1) && p == x^(N- i)
+
+A partir daqui ignorem
+
+method mult(x: nat) returns (f: nat)
+   requires x >= 1
+   ensures f == Factorial(x)
+{
+   f := 1;
+   var x1 := x;
+   //var p := 1;
+   while (x1 > 0)
+      invariant ( (f*x == (Factorial(x))/(Factorial(x1-1))) || x == 0)
+      //invariant p == i+i+1
+      invariant x >= 0
+   {
+f := f * x1;x1 := x1-1;
+   }
+}
