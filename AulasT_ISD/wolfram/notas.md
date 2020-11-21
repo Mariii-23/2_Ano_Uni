@@ -48,11 +48,11 @@ FindRoot[f[x] ⩵ x, {x, -1}]
 
 ### Calcular varios resultados de uma vez
 > Table[ *Funcao* , { x , valor_inicial, valor_final} ] 
-````
+```
 **EXAMPLE**
 ex1[k_] := 1 - 2 ex1[k - 1]
 ex1[0] = 0.86;
 Table[ex1[k], {k, 1, 5}]
-````
+```
 
 
