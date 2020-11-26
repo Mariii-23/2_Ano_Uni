@@ -86,3 +86,12 @@ f1[Part[solucoes08, 6]]
 ```
 Assim sendo, um deles é dado por {-0.98568, -0.104418}
 sendo o outro dado por {-2.12026, 0.222521}
+
+##### Classificar os pontos fixos segundo a sua dinamica
+```
+f1[x_] = x^3
+der[x_] = f1'[x]
+Plot[ {x, f1[x]}, {x,- 2, 2}, PlotRange->{-3,3}, Frame->True ]
+Solve[f1[x]==x]
+solucoes = der[x]/.Solve[f1[x]==x]
+```
