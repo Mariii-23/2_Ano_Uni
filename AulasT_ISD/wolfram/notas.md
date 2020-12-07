@@ -95,3 +95,18 @@ Plot[ {x, f1[x]}, {x,- 2, 2}, PlotRange->{-3,3}, Frame->True ]
 Solve[f1[x]==x]
 solucoes = der[x]/.Solve[f1[x]==x]
 ```
+
+##### Estudo, relativamente à existência e estabilidadde, os pontos fixos e os ciclos de periodo 2 de uma funcao dada
+```
+f1[x_] = 0.32-1.52x-0.41x^2-0.15x^3
+der[x_] =Abs[f1'[x]]
+sol1 = x/.Solve[f1[x]==x]
+fixos =Part[sol1,-1]
+ 
+sol2 = x/.Solve [f1[f1[x]]==x]
+ciclo2 = Part[sol2,{-1,1}]
+  
+estabilidadefixos = der[fixos]
+ 
+estabilidadeciclo = der[Part[ciclo2,1]]*der[Part[ciclo2,2]]
+```
