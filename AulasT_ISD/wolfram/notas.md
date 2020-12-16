@@ -110,3 +110,31 @@ estabilidadefixos = der[fixos]
  
 estabilidadeciclo = der[Part[ciclo2,1]]*der[Part[ciclo2,2]]
 ```
+
+completo:
+```
+f1[x_] = -0.82 +0.15x+0.98x^2+0.74x^3-0.28x^4
+der[x_] =Abs[f1'[x]]
+sol1 = x/.Solve[f1[x]==x]
+fixos = Select[sol1, (Im[#] == 0) &]
+fixos1 =Part[sol1,-1]
+ 
+sol2 = x/.Solve [f1[f1[x]]==x]
+ciclo2 = Select[sol2, (Im[#]==0) &]
+ciclo2e = Part[sol2,{-1,1}]
+  
+estabilidadefixos = der[fixos]
+ 
+estabilidadeciclo = der[Part[ciclo2,4]]*der[Part[ciclo2,6]]
+```
+
+
+##### Caracterize os atratores:
+```
+f2[x_] = -0.6 + 1.31x + 3.85 x^2 + 3.5x^3
+Plot[{x, f2[x]}, Plotrange → {-1, 1}, {x, -1, 1}, Frame → True, AspectRatio → Automatic]
+
+ListPlot[NestList[f2, RandomReal[{-1, 1}], 30], Joined → True, Mesh → True, PlotRange → {-1, 1}]
+
+/* Histogram[Take[NestList[f2, RandomReal[{-1, 1}], 180000], -140000],{-1,1,0.03}] */
+```
