@@ -18,7 +18,7 @@ echo "
 00, 2.0, Arquitetura de Computadores
 00, 2.0, Comunicação de Dados
 00, 1.5, Engenharia Económica
-00, 1.5, Estatística Aplicada
+13, 1.5, Estatística Aplicada
 00, 1.0, Introdução aos Sistemas Dinâmicos
 
 00, 2.0, Cálculo de Programas
