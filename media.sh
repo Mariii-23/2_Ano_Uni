@@ -15,11 +15,11 @@ echo "
 12, 1.5, Tópicos de Física Moderna
 
 00, 1.0, Algoritmos e Complexidade
-00, 2.0, Arquitetura de Computadores
+17, 2.0, Arquitetura de Computadores
 00, 2.0, Comunicação de Dados
-00, 1.5, Engenharia Económica
+15, 1.5, Engenharia Económica
 13, 1.5, Estatística Aplicada
-00, 1.0, Introdução aos Sistemas Dinâmicos
+18, 1.0, Introdução aos Sistemas Dinâmicos
 
 00, 2.0, Cálculo de Programas
 00, 1.5, Eletromagnetismo EE
