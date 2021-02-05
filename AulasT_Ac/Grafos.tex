@@ -1,0 +1,231 @@
+% Created 2021-02-04 Thu 12:11
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\date{\today}
+\title{Grafos}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={Grafos},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Tipos de grafos}
+\label{sec:org40f4aae}
+\subsection{Grafos Orientados}
+\label{sec:orgcb89a62}
+Um grafo orientado é um par (V,E) :
+\begin{itemize}
+\item V : Um conjunto finito de vértices ou nós
+\item E : Relaçáo binária sobre V (o conjunto de arestas ou arcos do grafo)
+\end{itemize}
+
+\subsubsection{Exemplo de um grafo}
+\label{sec:org86d08e5}
+\href{./exemplo\_grafo.png}{Exemplo de um grafo
+}
+\begin{itemize}
+\item Se (i,j)\(\in\) E, j diz-se adjacente a i
+i e j são respectivamente os vértices de origem e destino da aresta (i,j)
+
+\item O grau de entrada de um vértice  é o número de arestas com destino nesse vértice
+\item O grau de saída de um vértice  é o número de arestas com origem nesse vértice
+\item Uma aresta (i,i) designa-se por anel
+\item O número máximo de arestas de um grafo com conjunto de vértices V é V\textsuperscript{2}
+\item Um grafo diz-se esparso se o número de arestas for muito inferior a V\textsuperscript{2}, e denso em caso contrário
+\end{itemize}
+
+\subsubsection{Representação em Computador de Grafos Orientados}
+\label{sec:org4d78884}
+\href{./matrix\_grafo.png}{Matrix Grafo}
+
+\begin{verbatim}
+#define MAX 100
+typedef char GraphM[MAX][MAX];
+\end{verbatim}
+
+\begin{enumerate}
+\item Tempo
+\label{sec:org77f358a}
+\begin{itemize}
+\item O espaço de memória necessário para representar um grafo (V,E) é \(\Theta\)(V\textsuperscript{2}),  independente do número de arcos, e portanto da densidade do grafo;
+\item é poss+ivel verificar em tempo constante se dois vértices são adjacentes
+\item para conhecer os  adjacentes a um determinado vértice u, é necessário percorrer todos os vértices v do grafo, consultando para cada um a posição (u,v) da matriz.
+\end{itemize}
+\end{enumerate}
+
+\subsubsection{Representação por Listas de Adjacências}
+\label{sec:org7bd8bf0}
+Uma representação alternativa consiste em associar a cada vértice do grafo uma lista contendo os vértices que lhe são adjacentes.
+
+\begin{itemize}
+\item um array de apontadores
+\item cujos índices correspondem aos vértices do grafo, e
+\item contendo em cada posição o (endereço do) primeiro elemento da lista de adjacência do vértice respectivo
+\end{itemize}
+
+\href{./lista\_grafo.png}{Exemplo}
+
+\begin{verbatim}
+#define MAX 100
+
+struct edge {
+  int dest;
+  struct edge *next;
+};
+typedef struct edge *GraphL[MAX];
+\end{verbatim}
+
+\begin{enumerate}
+\item Tempo
+\label{sec:org4b3c5c8}
+\begin{itemize}
+\item O espaço de memória necessário para esta representação de um grafo (V,E)  é  \(\Theta\)(V+E), o que a torna uma representação eficiente no caso de grafos esparsos;
+\item o teste de adjacência de dois vértices obriga à travessia de uma lista ligada, executada no pior caso em tempo \(\Theta\)(V);
+\item a consulta dos adjacentes a um vértice u implica apenas percorrer a lista de adjacências de u, em vez de percorrer todos os vértices. Num grafo pouco denso, o impacto na implementação de um algoritmo que efectue esta operação repetidamente pode ser muito grande. É o caso por exemplo dos algoritmos de travessia de grafos.
+\end{itemize}
+\end{enumerate}
+
+\subsection{Grafos com pesos}
+\label{sec:org633bfdc}
+Em certos contextos é útil associar informação (pesos) às arestas de um grafo, em particular numérica.
+\subsubsection{Representação em Computador de Grafos com Pesos}
+\label{sec:org416aa74}
+\begin{enumerate}
+\item Matriz
+\label{sec:org12c4f32}
+\href{./peso\_grafo.png}{Exemplo}
+
+Em C:
+\begin{verbatim}
+#define NE 0 // Nodo vazio
+#define MAX 100
+typedef int WEIGHT;
+typedef WEIGHT GraphM[MAX][MAX];
+\end{verbatim}
+\end{enumerate}
+\subsubsection{Representação por Listas de Adjacências}
+\label{sec:orga915417}
+\begin{itemize}
+\item As arestas do grafo são aqui representadas por nós das listas ligadas de adjacências. Sendo assim, basta criar um campo adicional nestas estruturas (nós das listas) para guardar o peso das arestas.
+
+\item Note-se que, uma vez que nesta representação o teste de existência de uma aresta não é feito pela consulta do valor numérico do peso (como era o caso com uma matriz de adjacências), mas sim pela existência ou não de um nó com um determinado destino na lista ligada, não é agora necessária a utilização de um valor especial NE para representar o peso de uma aresta inexistente
+\end{itemize}
+
+Em C:
+\begin{verbatim}
+#define NE 0 // Valor de uma aresta inexistente
+#define MAX 100
+typedef int WEIGHT;
+struct edge {
+  int dest;
+  WEIGHT weight;
+  struct edge *next;
+};
+typedef struct edge *GraphL[MAX];
+\end{verbatim}
+
+\subsection{Grafos não orientados}
+\label{sec:orgb13d44a}
+Num grafo não-orientado as arestas são conjuntos com dois vértices $\backslash${u,v$\backslash$} \(\in\) E em vez de pares ordenados. Por outras palavras, as aresta são bi-direccionais, o que é adequado, por exemplo, para modelar redes em que todas as ligações entre pares de vértices funcionam nos dois sentidos.
+\href{./nao\_orientado\_grafo.png}{Exemplo}
+
+\subsubsection{Representação em Computador de Grafos Não-orientados}
+\label{sec:orgb61ab0f}
+A representação típica de um grafo não-orientado passa pela sua conversão para um grafo orientado simétrico, em que se $\backslash${u,v$\backslash$} \(\in\) E então também $\backslash${v,u$\backslash$} \(\in\) E.
+
+Note-se que uma tal representação contém redundância:
+
+
+\begin{itemize}
+\item No caso da representação por uma matriz de adjacências poder-se-á eliminar esta redundância representando de forma eficiente apenas uma matriz triangular.
+\end{itemize}
+
+
+\begin{itemize}
+\item No caso da representação por listas de adjacências a eliminação da redundância será quase de certeza uma má ideia. Se se representar a aresta (u,v) \(\in\) E apenas por um nó, na lista de adjacência de u ou de v, então, para ter acesso a todos os vértices adjacentes a um qualquer nó não bastará percorrer a sua lista de adjacências; será necessário percorrer todas as listas de adjacências do grafo.
+\end{itemize}
+
+\subsection{Codigo}
+\label{sec:org7530d9d}
+\begin{verbatim}
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define N 8
+
+enum search { DFirst, BFirst };
+
+typedef struct aresta {
+  int destino, peso;
+  struct aresta *prox;
+} * LAdj;
+
+typedef LAdj Grafo[N];
+
+/* Adicionar uma aresta */
+Ladj newA(int dest, int peso, Ladj t){
+ Ladj new = malloc(sizeof(struct aresta));
+ new->destino = dest ; 
+ new->peso = peso;
+ new->prox = t; 
+ return new;
+}
+
+/* Construir um Grafo a partir de uma matriz */
+void constroiGrafo(int mat[N][N], Grafo g) {
+  for (int i = 0; i < N; i++) {
+    g[i] = NULL;
+    for (int j = 0; j < N; j++)
+      if (mat[i][j] != 0)
+        g[i] = newA(j, mat[i][j], g[i]);
+  }
+}
+
+/* Determinar quantas arestas tem um determinado grafo */
+int quantasArestas(Grafo g) {
+  int n = 0;
+  LAdj a;
+  for (int i = 0; i < N; i++)
+    for (a = g[i]; a; a = a->prox, n++)
+      ;
+  return n;
+}
+
+/* Determinar a capacidade de um grafo */
+int capacidade(Grafo g, int v) {
+  int n = 0;
+  LAdj a;
+  for (int i = 0; i < N; i++)
+    for (a = g[i]; a; a = a->prox) {
+      if (i == v)
+        n -= a->peso;
+      if (a->destino == v)
+        n += a->peso;
+    }
+  return n;
+}
+\end{verbatim}
+\captionof{figure}{\label{fig:Functions}Some functions}
+\section{Algoritmos de Travessia de Grafos}
+\label{sec:org364f273}
+\end{document}
