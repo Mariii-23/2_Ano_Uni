@@ -78,14 +78,14 @@ typedef struct btree_ {
 #define R (+1)
 
 Btree_ rotate_left(Btree_ t) {
-  Btree_ b = t->left;
+  Btree_ b = t->right;
   t->right = b->left;
   b->left = t;
   return b;
 }
 
 Btree_ rotate_right(Btree_ t) {
-  Btree_ b = t->right;
+  Btree_ b = t->left;
   t->left = b->right;
   b->right = t;
   return b;
