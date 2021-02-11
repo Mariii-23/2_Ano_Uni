@@ -1,8 +1,43 @@
 /* #include "exercicios.h" */
+#include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <malloc.h>
+#include <string.h>
 #define COUNT 10
+
+#define SIZE 1009
+typedef struct no {
+  char matricula[6];
+  struct no *next;
+} No;
+typedef No *Tabela[SIZE];
+
+int hash_(char matricula[6]) {
+  int sum;
+  for (int i = 0; matricula[i] != '\0' && i < 6; sum += matricula[i++])
+    ;
+  return sum % SIZE;
+}
+
+int insert_(Tabela t, char matricula[6]) {
+  int sucess = 0, key;
+  key = hash_(matricula);
+
+  if (!t)
+    t = calloc(1, SIZE * sizeof(struct no));
+  No *ola = t[key];
+  while (!sucess && ola) {
+    sucess = !strcmp(ola->matricula, matricula);
+    ola = ola->next;
+  }
+  if (!sucess && ola == NULL) {
+    ola = malloc(sizeof(No));
+    strcpy(ola->matricula, matricula);
+    ola->next = NULL;
+    sucess = 1;
+  }
+  return sucess;
+}
 
 /* 42. */
 
@@ -10,27 +45,35 @@
 #define BAL 0
 #define RIGHT -1
 typedef struct avl42 {
-    int value;
-    int bal;
-    struct avl42 *left, *right;
-} *AVL42;
+  int value;
+  int bal;
+  struct avl42 *left, *right;
+} * AVL42;
 
-AVL42 maisProfundo(AVL42 l){
-    if(!l) return NULL;
-    else if( l && !l->right && !l->left) return l;
-    else{
-        switch(l->bal){
-            case LEFT: maisProfundo(l->left) ;break;
-            case BAL: maisProfundo(l->right);break;
-            case RIGHT: maisProfundo(l->right);break;
-        }
+AVL42 maisProfundo(AVL42 l) {
+  if (!l)
+    return NULL;
+  else if (l && !l->right && !l->left)
+    return l;
+  else {
+    switch (l->bal) {
+    case LEFT:
+      maisProfundo(l->left);
+      break;
+    case BAL:
+      maisProfundo(l->right);
+      break;
+    case RIGHT:
+      maisProfundo(l->right);
+      break;
     }
+  }
 }
 
-AVL42 maisProfundo_(AVL42 l){
-    while( l && (( l->bal==BAL && l->right ) || l->bal!=BAL )))
-        l = l->bal == LEFT? l->left : l->right;
-    return l;
+AVL42 maisProfundo_(AVL42 l) {
+  while (l && ((l->bal == BAL && l->right) || l->bal != BAL))
+    l = l->bal == LEFT ? l->left : l->right;
+  return l;
 }
 
 /* b. R: 29 Sendo q so inserimos os valores e nao a balanceamos */
@@ -39,29 +82,29 @@ AVL42 maisProfundo_(AVL42 l){
 
 /* 44. */
 typedef struct llint {
-    int value;
-    struct llint *next;
-} *LInt;
+  int value;
+  struct llint *next;
+} * LInt;
 
 typedef enum balancefactor { LH, EH, RH } BalanceFactor;
 
 typedef struct avl {
-    int value;
-    int deleted;
-    BalanceFactor bal;
-    struct avl *esq, *dir;
-} *AVL1;
+  int value;
+  int deleted;
+  BalanceFactor bal;
+  struct avl *esq, *dir;
+} * AVL1;
 
-AVL1 insert(LInt *l){
-    AVL1 t;
-    if(l){
-       t = (AVL1)malloc(sizeof(struct avl));
-       t->value=(*l)->value;
-       t->bal=EH;
-       t->deleted=0;
-       t->esq=t->dir=NULL;
-    }
-    return t;
+AVL1 insert(LInt *l) {
+  AVL1 t;
+  if (l) {
+    t = (AVL1)malloc(sizeof(struct avl));
+    t->value = (*l)->value;
+    t->bal = EH;
+    t->deleted = 0;
+    t->esq = t->dir = NULL;
+  }
+  return t;
 }
 
 /* AVL1 fromlist_aux(LInt *l,int N){ */
@@ -85,96 +128,96 @@ AVL1 insert(LInt *l){
 /*     } */
 /*     return r; */
 /* } */
-AVL1 fromlist_aux(LInt *l,int N){
-    AVL1 r = NULL;
-    if (*l && N>0){
-       r = malloc(sizeof(struct avl));
-       r->esq = fromlist_aux(l, N/2);
-       r->value = (*l)->value; r->bal = EH;
-       *l=(*l)->next;
-       r->dir = fromlist_aux(l, N - N/2 - 1);
-       if(!r->dir) r->bal=LH;
-    }
-    return r;
+AVL1 fromlist_aux(LInt *l, int N) {
+  AVL1 r = NULL;
+  if (*l && N > 0) {
+    r = malloc(sizeof(struct avl));
+    r->esq = fromlist_aux(l, N / 2);
+    r->value = (*l)->value;
+    r->bal = EH;
+    *l = (*l)->next;
+    r->dir = fromlist_aux(l, N - N / 2 - 1);
+    if (!r->dir)
+      r->bal = LH;
+  }
+  return r;
 }
 
-AVL1 fromlist(LInt l,int N){
-    return fromlist_aux(&l, N);
-}
+AVL1 fromlist(LInt l, int N) { return fromlist_aux(&l, N); }
 /* ----------------------------- */
 /* MUITO MAU */
-AVL1 rotateRight_ (AVL1 a){
-    AVL1 aux = a->esq;
-    a->esq = aux->dir;
-    aux->dir=a;
-    return aux;
+AVL1 rotateRight_(AVL1 a) {
+  AVL1 aux = a->esq;
+  a->esq = aux->dir;
+  aux->dir = a;
+  return aux;
 }
-AVL1 rotateLeft__ (AVL1 a){
-    AVL1 aux = a->dir;
-    a->dir = aux->esq;
-    aux->esq=a;
-    return aux;
+AVL1 rotateLeft__(AVL1 a) {
+  AVL1 aux = a->dir;
+  a->dir = aux->esq;
+  aux->esq = a;
+  return aux;
 }
 
-AVL1 aux_44(AVL1 t, LInt l, int *cresceu){
-    if(l==NULL){
-        AVL1 t;
-        t = (AVL1)malloc(sizeof(struct avl));
-        t->value=l->value;
-        t->bal=EH;
-        t->deleted=0;
-        t->esq=t->dir=NULL;
-        *cresceu=1;
-    }else if (l->value > t->value){
-        t->dir =aux_44(t->dir, l, cresceu);
-        if (*cresceu){
-            switch (t->bal){
-                case LH:
-                    t->bal=EH;
-                    *cresceu=0;
-                    break;
-                case EH:
-                    t->bal=RH;
-                    *cresceu=1;
-                    break;
-                case RH:
-                    t = rotateLeft__(t);
-                    *cresceu =0;
-                    break;
-            }
-        }
-    }else{
-        t->esq =aux_44(t->esq, l, cresceu);
-        if (*cresceu){
-            switch (t->bal){
-                case LH:
-                    t->bal=EH;
-                    t = rotateRight_(t);
-                    *cresceu=0;
-                    break;
-                case EH:
-                    t->bal=LH;
-                    *cresceu=1;
-                    break;
-                case RH:
-                    t->bal = EH;
-                    *cresceu =0;
-                    break;
-            }
-        }
+AVL1 aux_44(AVL1 t, LInt l, int *cresceu) {
+  if (l == NULL) {
+    AVL1 t;
+    t = (AVL1)malloc(sizeof(struct avl));
+    t->value = l->value;
+    t->bal = EH;
+    t->deleted = 0;
+    t->esq = t->dir = NULL;
+    *cresceu = 1;
+  } else if (l->value > t->value) {
+    t->dir = aux_44(t->dir, l, cresceu);
+    if (*cresceu) {
+      switch (t->bal) {
+      case LH:
+        t->bal = EH;
+        *cresceu = 0;
+        break;
+      case EH:
+        t->bal = RH;
+        *cresceu = 1;
+        break;
+      case RH:
+        t = rotateLeft__(t);
+        *cresceu = 0;
+        break;
+      }
     }
-    return t;
+  } else {
+    t->esq = aux_44(t->esq, l, cresceu);
+    if (*cresceu) {
+      switch (t->bal) {
+      case LH:
+        t->bal = EH;
+        t = rotateRight_(t);
+        *cresceu = 0;
+        break;
+      case EH:
+        t->bal = LH;
+        *cresceu = 1;
+        break;
+      case RH:
+        t->bal = EH;
+        *cresceu = 0;
+        break;
+      }
+    }
+  }
+  return t;
 }
 
-AVL1 fromList (LInt l,int n){
-    int cresceu=0;
-    AVL1 a=NULL;
-    while(l)
-    { a= aux_44(a,l,&cresceu); l=l->next;}
-    return a;
+AVL1 fromList(LInt l, int n) {
+  int cresceu = 0;
+  AVL1 a = NULL;
+  while (l) {
+    a = aux_44(a, l, &cresceu);
+    l = l->next;
+  }
+  return a;
 }
-
-
 
 /* 45. */
 /*
@@ -207,81 +250,83 @@ AVL1 fromList (LInt l,int n){
 #define OCUPADO 2
 
 struct entry {
-    int value, status;
+  int value, status;
 };
 
 typedef struct thash {
-    int ocupados, tamanho;
-    struct entry *tabela;
-} *THash;
+  int ocupados, tamanho;
+  struct entry *tabela;
+} * THash;
 
-void inicia_tabela(struct entry *a, int tamanho){
-    a= malloc(tamanho*(sizeof(int)));
+void inicia_tabela(struct entry *a, int tamanho) {
+  a = malloc(tamanho * (sizeof(int)));
 }
 
-void add_hash(THash h, int value){
-    if(h){
-        int x = value % h->tamanho;
-        while( h->tabela[x].status != OCUPADO && x<h->tamanho) x++;
-        /* criar o caso em q o x passa h e entao volta a 0 */
-        h->tabela[x].status=OCUPADO;
-        h->tabela[x].value=value;
-    }else{
-        h = malloc(sizeof(struct thash));
-        h->tamanho=3;
-        h->ocupados=1;
-        inicia_tabela(h->tabela,3);
-        add_hash(h, value);
-    }
+void add_hash(THash h, int value) {
+  if (h) {
+    int x = value % h->tamanho;
+    while (h->tabela[x].status != OCUPADO && x < h->tamanho)
+      x++;
+    /* criar o caso em q o x passa h e entao volta a 0 */
+    h->tabela[x].status = OCUPADO;
+    h->tabela[x].value = value;
+  } else {
+    h = malloc(sizeof(struct thash));
+    h->tamanho = 3;
+    h->ocupados = 1;
+    inicia_tabela(h->tabela, 3);
+    add_hash(h, value);
+  }
 }
 
-int verifica_hash(THash h){
-    int r=0;
-    if ( h->ocupados/h->tamanho < 0.33 ){
-        struct entry *aux = h->tabela;
-        h->tamanho= 2*h->tamanho/3;
-        // realloc do espaco
-        // inserir again os elementos
-    }
+int verifica_hash(THash h) {
+  int r = 0;
+  if (h->ocupados / h->tamanho < 0.33) {
+    struct entry *aux = h->tabela;
+    h->tamanho = 2 * h->tamanho / 3;
+    // realloc do espaco
+    // inserir again os elementos
+  }
 
+  return r;
+}
+
+int removed_hash(THash h, int x) {
+  int r = 0;
+  int key = x % h->tamanho;
+
+  while (h->tabela[x].status == 1)
+    x++;
+  if (h->tabela[x].status == LIVRE)
     return r;
+
+  h->tabela[x].status = APAGADO;
+  h->ocupados--;
+
+  r = verifica_hash(h);
+  return r;
 }
-
-int removed_hash(THash h, int x){
-    int r=0;
-    int key= x % h->tamanho;
-
-    while ( h->tabela[x].status == 1 ) x++;
-    if (h->tabela[x].status == LIVRE) return r;
-
-    h->tabela[x].status = APAGADO;
-    h->ocupados--;
-
-    r = verifica_hash(h);
-    return r;
-}
-
 
 /* 47. */
 typedef struct nodo {
-    int valor;
-    struct nodo *esq, *dir;
-} *AVL;
+  int valor;
+  struct nodo *esq, *dir;
+} * AVL;
 
-AVL rotateRight (AVL a){
-    AVL aux = a->esq;
-    a->esq = aux->dir;
-    aux->dir=a;
-    return aux;
+AVL rotateRight(AVL a) {
+  AVL aux = a->esq;
+  a->esq = aux->dir;
+  aux->dir = a;
+  return aux;
 }
 
-AVL spine (AVL a){
-    if (a!=NULL) {
-        while (a->esq != NULL)
-            a=rotateRight (a);
-        a->dir = spine(a->dir);
-    }
-    return (a);
+AVL spine(AVL a) {
+  if (a != NULL) {
+    while (a->esq != NULL)
+      a = rotateRight(a);
+    a->dir = spine(a->dir);
+  }
+  return (a);
 }
 
 /*
@@ -297,62 +342,127 @@ AVL spine (AVL a){
 **            = sum k=1 to h-1, 1
 **            = h-1 = O(N)
 */
-LInt ins(int value, LInt l){
-    LInt new = NULL;
+LInt ins(int value, LInt l) {
+  LInt new = NULL;
 
+  new = malloc(sizeof(struct llint));
+  new->value = value;
+  new->next = l;
+  return new;
+}
+
+LInt inserLint(int *a, int n) {
+  LInt new = NULL;
+  if (n > 0) {
     new = malloc(sizeof(struct llint));
-    new->value = value;
-    new->next = l;
-    return new;
-
+    new->value = a[0];
+    new->next = inserLint(a + 1, n - 1);
+  }
+  return new;
 }
 
-LInt inserLint(int *a,int n){
-    LInt new = NULL;
-    if (n>0){
-        new = malloc(sizeof(struct llint));
-        new->value = a[0];
-        new->next = inserLint(a+1,n-1);
+/* exame 2016/2017 */
+#define HSIZE 23
+#define FREE -1
+typedef struct entry1 {
+  int probeC; // -1: free
+  int key;
+  int value;
+} HTable[HSIZE];
+
+int hash(int key, int size) {
+  /* faz qualquer coisa */
+  return 1;
+}
+
+/*Matilde bravo*/
+int update(HTable t, int key, int value) {
+  int p = hash(key, HSIZE);
+  int probe = 0;
+  int j = 0;
+  for (int i = p; i < HSIZE && j < HSIZE; j++, i = (i + 1) % HSIZE) {
+    if (t[i].key == key || t[p].probeC == FREE) {
+      t[i] = (struct entry1){
+          .probeC = probe,
+          .key = key,
+          .value = value,
+      };
+    } else {
+      probe++;
     }
-    return new;
+  }
+  return (int)j == HSIZE;
 }
+/****/
+/* 4. */
+typedef struct aresta {
+  int destino, peso;
+  struct aresta *prox;
+} * LAdj;
+#define N1 10
+typedef LAdj Grafo[N1];
+
+int dijkstraSP(Grafo g, int v, int pesos[], int pais[]) { return 1; }
+int aproxMeio(Grafo g, int o, int d) {
+  if (d - o < 0)
+    return -1;
+  int sucess = 0;
+  int soma = 0, i;
+  int pesos[N1], pais[N1];
+  int r = dijkstraSP(g, o, pesos, pais);
+
+  for (i = 0; i < N1 && pais[i] != d; i++)
+    soma += pesos[i];
+  soma = soma / 2;
+  int aux;
+  for (i = 0, aux = 0; i < N1 && aux < soma; i++)
+    aux += pesos[i];
+
+  if (abs(aux - pesos[i]) > aux)
+    sucess = abs(aux - pesos[i]);
+  else
+    sucess = aux;
+  return sucess;
+}
+
+/*-----------*/
 
 // Function to print binary tree in 2D
 // It does reverse inorder traversal
-void print2DUtil( AVL1 root, int space)
-{
-    // Base case
-    if (root == NULL) return;
-    // Increase distance between levels
-    space += COUNT;
-    // Process right child first
-    print2DUtil(root->dir, space);
-    // Print current node after space
-    // count
-    printf("\n");
-    for (int i = COUNT; i < space; i++)
-        printf(" ");
-    printf("%d\n", root->value);
-    // Process left child
-    print2DUtil(root->esq, space);
+void print2DUtil(AVL1 root, int space) {
+  // Base case
+  if (root == NULL)
+    return;
+  // Increase distance between levels
+  space += COUNT;
+  // Process right child first
+  print2DUtil(root->dir, space);
+  // Print current node after space
+  // count
+  printf("\n");
+  for (int i = COUNT; i < space; i++)
+    printf(" ");
+  printf("%d\n", root->value);
+  // Process left child
+  print2DUtil(root->esq, space);
 }
 
+void main44() {
+  printf("Excercicio 44: \n\n");
+  int N = 20;
+  int array[50];
+  for (int i = N - 1; i >= 0; i--)
+    array[i] = i + 1;
 
-void main44(){
-    printf("Excercicio 44: \n\n");
-    int N=20;
-    int array[50];
-    for (int i=N-1; i>=0;i--){ array[i]=i+1;}
+  LInt ola = NULL;
+  for (int i = N; i > 0; i--)
+    ola = ins(array[i - 1], ola);
 
-    LInt ola = NULL;
-    for (int i=N; i>0;i--) ola = ins(array[i-1],ola);
-
-    AVL1 resul = fromlist(ola, N);
-    print2DUtil(resul, 0);
+  AVL1 resul = fromlist(ola, N);
+  print2DUtil(resul, 0);
 }
 
-int main (){
-    main44();
-    return 0;
-
+int main() {
+  main44();
+  return 0;
 }
