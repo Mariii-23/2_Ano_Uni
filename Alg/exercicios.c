@@ -3,6 +3,40 @@
 #include <stdlib.h>
 #include <malloc.h>
 #define COUNT 10
+
+/* 42. */
+
+#define LEFT 1
+#define BAL 0
+#define RIGHT -1
+typedef struct avl42 {
+    int value;
+    int bal;
+    struct avl42 *left, *right;
+} *AVL42;
+
+AVL42 maisProfundo(AVL42 l){
+    if(!l) return NULL;
+    else if( l && !l->right && !l->left) return l;
+    else{
+        switch(l->bal){
+            case LEFT: maisProfundo(l->left) ;break;
+            case BAL: maisProfundo(l->right);break;
+            case RIGHT: maisProfundo(l->right);break;
+        }
+    }
+}
+
+AVL42 maisProfundo_(AVL42 l){
+    while( l && (( l->bal==BAL && l->right ) || l->bal!=BAL )))
+        l = l->bal == LEFT? l->left : l->right;
+    return l;
+}
+
+/* b. R: 29 Sendo q so inserimos os valores e nao a balanceamos */
+
+/* 43. ja fiz algures nas folhas */
+
 /* 44. */
 typedef struct llint {
     int value;
@@ -56,7 +90,7 @@ AVL1 fromlist_aux(LInt *l,int N){
     if (*l && N>0){
        r = malloc(sizeof(struct avl));
        r->esq = fromlist_aux(l, N/2);
-       r->value = (*l)->value;
+       r->value = (*l)->value; r->bal = EH;
        *l=(*l)->next;
        r->dir = fromlist_aux(l, N - N/2 - 1);
        if(!r->dir) r->bal=LH;
@@ -306,7 +340,7 @@ void print2DUtil( AVL1 root, int space)
 
 void main44(){
     printf("Excercicio 44: \n\n");
-    int N=5;
+    int N=20;
     int array[50];
     for (int i=N-1; i>=0;i--){ array[i]=i+1;}
 
