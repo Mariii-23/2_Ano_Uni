@@ -9,6 +9,10 @@
 #define BAL 0
 #define RIGHT -1
 
+#define Livre 0
+#define Ocupado 1
+#define Apagado 2
+
 /* 1. */
 #define SIZE 1009
 typedef struct no {
@@ -43,6 +47,20 @@ int insert_(Tabela t, char matricula[6]) {
   }
   return sucess;
 }
+
+/* 31. */
+
+/* 32.
+ *
+ * procura(12)-> hash:1 :
+ *   * posicoes percorridas: 1, 2
+ *   * return -1
+ *
+ * procura(37)-> hash:4 :
+ *   * posicoes percorridas: 4, 5, 6, 7, 8, 9, 10
+ *   * return -1
+ *
+ * */
 
 /* 38. */
 /* a) final:
