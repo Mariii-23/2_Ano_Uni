@@ -5,6 +5,11 @@
 #include <string.h>
 #define COUNT 10
 
+#define LEFT 1
+#define BAL 0
+#define RIGHT -1
+
+/* 1. */
 #define SIZE 1009
 typedef struct no {
   char matricula[6];
@@ -38,6 +43,135 @@ int insert_(Tabela t, char matricula[6]) {
   }
   return sucess;
 }
+
+/* 38. */
+/* a) final:
+**             2
+**          /     \
+**         13     12
+**        /  \    / \
+**       50  20  42 36
+*/
+
+/* b) ??? */
+
+/* 39. */
+typedef struct avlnode {
+  int value;
+  int bal; // Left/Bal/Right
+  struct avlnode *left, *right;
+} * AVLTree;
+
+/* a.
+ *
+ * Melhor caso -> Quando a arvore se encontra em equilibrio
+ * T(N) = N
+ * Pior caso -> A arvore apresenta um lado maior que o outro
+ * T(N) = N
+ * */
+
+/*b) */
+int deepest(AVLTree arv) {
+  AVLTree l = arv;
+  if (!l)
+    return 0;
+  int count = 1;
+  while (l && ((l->bal == BAL && l->right) || l->bal != BAL)) {
+    l = l->bal == LEFT ? l->left : l->right;
+    count++;
+  }
+  return count;
+}
+/*
+ * Melhor caso -> Quando a arvore se encontra em equilibrio
+ * T(N) = log_2(N)
+ * Pior caso -> A arvore apresenta um lado maior que o outro
+ * T(N) = log_2(N) + 1
+ * */
+
+/* 40. */
+#define HSIZE40 1000
+
+/* fazer algo */
+int hash40(int chave, int size) { return 0; }
+
+typedef struct lista {
+  int valor;
+  struct lista *prox;
+} * HashChain40[HSIZE40];
+
+typedef struct celula {
+  int estado; // 0 - Livre
+  // 1 - Ocupado
+  // 2 - Removido
+  int valor;
+} HashOpen40[HSIZE40];
+
+int linear_probing(HashOpen40 h, int key) {
+  int p = hash40(key, HSIZE40);
+  int i;
+  for (i = 0; i < HSIZE40 && h[p].estado == 1; i++, p = (p + 1) % HSIZE40)
+    ;
+  if (i == HSIZE40)
+    p = -1;
+  return p;
+}
+
+int fromChain(HashChain40 h1, HashOpen40 h2) {
+  int sucess = 1, i, j;
+
+  for (i = 0; i < HSIZE40; i++)
+    h2[i].estado = 0;
+
+  for (i = 0; sucess && i < HSIZE40; i++) {
+    for (struct lista *l = h1[i]; sucess && l; l = l->prox) {
+      j = linear_probing(h2, l->valor);
+      if (j == -1)
+        sucess = 0;
+      else {
+        h2[i].estado = 1;
+        h2[i].valor = l->valor;
+      }
+    }
+  }
+
+  return sucess;
+}
+
+/* 41 */
+#define Hsize41 13
+#define FREE41 0
+#define USED41 1
+#define DELETED41 2
+typedef struct entry41 {
+  int key;
+  int probec;
+  int status;
+} Entry41;
+typedef Entry41 Thash41[Hsize41];
+
+int hash41(int t) { return (t % Hsize41); }
+
+/* TABELA
+**   |-------------------------|
+**   | Key  | Probec | STATUS  |
+**   |-------------------------|
+**  0| 260  |  0     | USED    |
+**  1| 40   |  0     | USED    |
+**  2| 80   |  0     | USED    |
+**  3| 54   |  1     | USED    |
+**  4| 65   |  4     | USED    |
+**  5|      |        | FREE    |
+**  6|      |        | FREE    |
+**  7|      |        | FREE    |
+**  8| 60   |  0     | USED    |
+**  9|      |        | FREE    |
+** 10| 140  |  0     | USED    |
+** 11|      |        | FREE    |
+** 12|      |        | FREE    |
+** 13|      |        | FREE    |
+**   |-------------------------|
+*/
 
 /* 42. */
 
@@ -410,6 +544,9 @@ int aproxMeio(Grafo g, int o, int d) {
   int soma = 0, i;
   int pesos[N1], pais[N1];
   int r = dijkstraSP(g, o, pesos, pais);
+
+  if (r == 0)
+    return sucess;
 
   for (i = 0; i < N1 && pais[i] != d; i++)
     soma += pesos[i];
