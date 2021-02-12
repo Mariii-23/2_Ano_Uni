@@ -641,7 +641,7 @@ int aproxMeio(Grafo g, int o, int d) {
 
 /*  */
 int aux_con(AVL1 a) {
-  int l, r, x = 0;
+  int l = 0, r = 0, x = 0;
   if (!a)
     return x;
   r = aux_con(a->esq);
