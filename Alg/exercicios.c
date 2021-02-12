@@ -48,7 +48,66 @@ int insert_(Tabela t, char matricula[6]) {
   return sucess;
 }
 
+/* 29.
+ * feito na 39 */
+
+/* 30 */
+typedef struct nodo {
+  int valor;
+  int altura;
+  struct nodo *esq, *dir;
+} Node, *AVL30;
+
+AVL30 rotateLeft(AVL30 a) {
+  AVL30 aux = a->esq;
+  a->esq = aux->dir;
+  aux->dir = a;
+  a->altura = (a->altura == RIGHT) ? BAL : LEFT;
+  aux->altura = (aux->altura == RIGHT) ? BAL : LEFT;
+  return aux;
+}
+
 /* 31. */
+typedef struct key *Key;
+struct celula {
+  Key k;
+  void *info;
+  int estado; // Livre/Ocupado/Apagado
+};
+
+typedef struct shash {
+  int tamanho, ocupados, apagados;
+  struct celula *Tabela;
+} * THash;
+
+/* faz algo */
+int hash31(Key key, int n) { return n; }
+
+void remApagados(THash h) {
+  int key, tamanho = h->tamanho;
+  int i = 0, j, k, cont, failed;
+
+  for (i = 0; i < h->tamanho; i++) {
+    if (h->Tabela[i].estado == Apagado) {
+      key = hash31(h->Tabela[i].k, tamanho);
+      cont = 0;
+      for (j = i, k = i, failed = 0;
+           failed < tamanho && (h->Tabela[k + 1].estado != Livre);
+           k = (k + 1) % tamanho) {
+        if (hash31(h->Tabela[k + 1].k, tamanho) == key) {
+          h->Tabela[j] = h->Tabela[k + 1];
+          j += cont;
+          cont = 0;
+        } else {
+          cont++;
+          j = (j + 1) % tamanho;
+        }
+      }
+      h->Tabela[j].estado = Livre;
+    }
+  }
+  h->apagados = 0;
+}
 
 /* 32.
  *
@@ -86,6 +145,7 @@ typedef struct avlnode {
  * T(N) = N
  * Pior caso -> A arvore apresenta um lado maior que o outro
  * T(N) = N
+ * Caso Medios: sum i=1 to N , 2^i * k
  * */
 
 /*b) */
@@ -105,6 +165,7 @@ int deepest(AVLTree arv) {
  * T(N) = log_2(N)
  * Pior caso -> A arvore apresenta um lado maior que o outro
  * T(N) = log_2(N) + 1
+ * Caso Medio -> sum i=0 to log_2(N), i + k
  * */
 
 /* 40. */
@@ -118,7 +179,7 @@ typedef struct lista {
   struct lista *prox;
 } * HashChain40[HSIZE40];
 
-typedef struct celula {
+typedef struct celula40 {
   int estado; // 0 - Livre
   // 1 - Ocupado
   // 2 - Removido
@@ -408,13 +469,13 @@ struct entry {
 typedef struct thash {
   int ocupados, tamanho;
   struct entry *tabela;
-} * THash;
+} * THash46;
 
 void inicia_tabela(struct entry *a, int tamanho) {
   a = malloc(tamanho * (sizeof(int)));
 }
 
-void add_hash(THash h, int value) {
+void add_hash(THash46 h, int value) {
   if (h) {
     int x = value % h->tamanho;
     while (h->tabela[x].status != OCUPADO && x < h->tamanho)
@@ -431,7 +492,7 @@ void add_hash(THash h, int value) {
   }
 }
 
-int verifica_hash(THash h) {
+int verifica_hash(THash46 h) {
   int r = 0;
   if (h->ocupados / h->tamanho < 0.33) {
     struct entry *aux = h->tabela;
@@ -443,7 +504,7 @@ int verifica_hash(THash h) {
   return r;
 }
 
-int removed_hash(THash h, int x) {
+int removed_hash(THash46 h, int x) {
   int r = 0;
   int key = x % h->tamanho;
 
@@ -460,9 +521,9 @@ int removed_hash(THash h, int x) {
 }
 
 /* 47. */
-typedef struct nodo {
+typedef struct nodo47 {
   int valor;
-  struct nodo *esq, *dir;
+  struct nodo47 *esq, *dir;
 } * AVL;
 
 AVL rotateRight(AVL a) {
@@ -531,19 +592,17 @@ int hash(int key, int size) {
 int update(HTable t, int key, int value) {
   int p = hash(key, HSIZE);
   int probe = 0;
-  int j = 0;
-  for (int i = p; i < HSIZE && j < HSIZE; j++, i = (i + 1) % HSIZE) {
-    if (t[i].key == key || t[p].probeC == FREE) {
+  for (int i = p; probe < HSIZE; probe++, i = (i + 1) % HSIZE) {
+    if (t[i].key == key || t[i].probeC == FREE) {
       t[i] = (struct entry1){
           .probeC = probe,
           .key = key,
           .value = value,
       };
-    } else {
-      probe++;
+      break;
     }
   }
-  return (int)j == HSIZE;
+  return probe == HSIZE;
 }
 /****/
 /* 4. */
@@ -579,6 +638,21 @@ int aproxMeio(Grafo g, int o, int d) {
     sucess = aux;
   return sucess;
 }
+
+/*  */
+int aux_con(AVL1 a) {
+  int l, r, x = 0;
+  if (!a)
+    return x;
+  r = aux_con(a->esq);
+  l = aux_con(a->dir);
+  if (r != l)
+    x = r > l ? RIGHT : LEFT;
+  a->bal = x;
+  return x;
+}
+
+void convert(AVL1 a) { int r = aux_con(a); }
 
 /*-----------*/
 
