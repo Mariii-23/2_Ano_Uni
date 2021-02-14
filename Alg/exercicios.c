@@ -33,16 +33,17 @@ int insert_(Tabela t, char matricula[6]) {
   key = hash_(matricula);
 
   if (!t)
-    t = calloc(1, SIZE * sizeof(struct no));
+    /* t = calloc(1, SIZE * sizeof(struct no)); */
+    t = calloc(1, SIZE * sizeof(int)); /* ?? como é um array de enderecos */
   No *ola = t[key];
   while (!sucess && ola) {
     sucess = !strcmp(ola->matricula, matricula);
     ola = ola->next;
   }
   if (!sucess && ola == NULL) {
-    ola = malloc(sizeof(No));
+    ola = calloc(1, sizeof(No));
     strcpy(ola->matricula, matricula);
-    ola->next = NULL;
+    /* ola->next = NULL; */
     sucess = 1;
   }
   return sucess;
@@ -341,6 +342,7 @@ AVL1 insert(LInt *l) {
 /*     } */
 /*     return r; */
 /* } */
+/* bonito  */
 AVL1 fromlist_aux(LInt *l, int N) {
   AVL1 r = NULL;
   if (*l && N > 0) {
@@ -358,7 +360,7 @@ AVL1 fromlist_aux(LInt *l, int N) {
 
 AVL1 fromlist(LInt l, int N) { return fromlist_aux(&l, N); }
 /* ----------------------------- */
-/* MUITO MAU */
+/* MUITO MAU !!!! */
 AVL1 rotateRight_(AVL1 a) {
   AVL1 aux = a->esq;
   a->esq = aux->dir;
@@ -534,7 +536,7 @@ AVL rotateRight(AVL a) {
 }
 
 AVL spine(AVL a) {
-  if (a != NULL) {
+  if (a) {
     while (a->esq != NULL)
       a = rotateRight(a);
     a->dir = spine(a->dir);
@@ -554,6 +556,7 @@ AVL spine(AVL a) {
 ** T( AVL,h ) =  C1 + T( AVL->dir, h-1 )
 **            = sum k=1 to h-1, 1
 **            = h-1 = O(N)
+**
 */
 LInt ins(int value, LInt l) {
   LInt new = NULL;
@@ -639,22 +642,163 @@ int aproxMeio(Grafo g, int o, int d) {
   return sucess;
 }
 
-/*  */
-int aux_con(AVL1 a) {
-  int l = 0, r = 0, x = 0;
-  if (!a)
-    return x;
-  r = aux_con(a->esq);
-  l = aux_con(a->dir);
-  if (r != l)
-    x = r > l ? RIGHT : LEFT;
-  a->bal = x;
-  return x;
+/* Recurso 2018 / 2019 */
+/*3*/
+enum search { DFirst, BFirst };
+
+typedef struct aresta1 {
+  int destino, peso;
+  struct aresta1 *prox;
+} * LAdj1;
+#define N2 100
+typedef LAdj1 GrafoL[N2];
+
+int travessiaAux(GrafoL g, int o, int vis[]) {
+  int r;
+  LAdj1 x;
+
+  vis[o] = 1; // nunca mais inicio uma procura a partir de o
+  r = 1;
+  for (x = g[o]; x != NULL; x = x->prox) {
+    // existe uma aresta desde o até x->destino com peso x->peso
+    if (vis[x->destino] == 0) // ainda não tentei a partir daqui
+      r += travessiaAux(g, x->destino, vis);
+  }
+  return r;
 }
 
-void convert(AVL1 a) { int r = aux_con(a); }
+void FechoT(GrafoL g, int T[N2][N2]) {
+  for (int i = 0; i < N2; i++) {
+    for (int j = 0; j < N2; j++)
+      T[i][j] = 0;
+    travessiaAux(g, i, T[i]);
+  }
+}
+// O Custo será de log(N(V+E))
+
+/*2*/
+int aux_con(AVL1 a, int alt) {
+  if (!a)
+    return -1;
+
+  int r = 0, l = 0;
+  l = aux_con(a->esq, alt);
+  r = aux_con(a->dir, alt);
+
+  alt = l > r ? (l + 1) : (r + 1);
+  a->bal = alt;
+
+  return alt;
+}
+
+void convert(AVL1 a) { int r = aux_con(a, 0); }
 
 /*-----------*/
+/* 2018 2019 */
+/*1*/
+
+/* que faz o bubble down do elemento h[0] na heap h, com N elementos */
+void bubble_up(int h[], int N) {}
+/* que faz o bubble up do elemento h[N-1] na heap h, com N elementos */
+void bubble_down(int h[], int N) {}
+
+int kmaior(int v[], int N, int k) {
+  int *heap = malloc(k * sizeof(int)), i = 0;
+
+  while (i < k) {
+    heap[i] = v[i];
+    bubble_up(heap, ++i);
+  }
+  for (; i < N; i++) {
+    if (heap[0] < v[i]) {
+      heap[0] = v[i];
+      bubble_down(heap, k);
+    }
+  }
+  return heap[0];
+}
+/*-----------*/
+void heapify(int v[], int N) {
+  int i;
+  for (i = (N - 2) / 2; i >= 0; i--)
+    bubble_down(v, i); /* faz o bubble_down do i */
+}
+
+/* int most_reachable(GraphL g, int N) { */
+/*   int num_visitas[N]; */
+/*   int vis[N]; */
+/*   int lixo; */
+/*   int maior = 0; */
+/*   for (int i = 0; i < N; i++) { */
+/*     num_visitas[i] = 0; */
+/*     vis[i] = 0; */
+/*   } */
+/*   for (int i = 0; i < N; i++) { */
+/*     lixo = BFirstSearch(g, i, vis); */
+/*     for (int ii = 0, ii < N; ii++) { */
+/*       if (vis[ii] = 1) */
+/*         num_visitas[ii] = num_visitas[ii] + 1; */
+/*       if (num_visitas[ii] > num_visitas[maior]) */
+/*         maior = ii; */
+/*       vis[ii] = 0; */
+/*     } */
+/*   } */
+/* } */
+
+#define MAX 100
+struct edge {
+  int dest;
+  struct edge *next;
+};
+typedef struct edge *GraphL[MAX];
+
+/**/
+
+void floydWarshall(int graph[V][V]) {
+  /* dist[][] will be the output matrix
+    that will finally have the shortest
+    distances between every pair of vertices */
+  int dist[V][V], i, j, k;
+
+  /* Initialize the solution matrix
+    same as input graph matrix. Or
+     we can say the initial values of
+     shortest distances are based
+     on shortest paths considering no
+     intermediate vertex. */
+  for (i = 0; i < V; i++)
+    for (j = 0; j < V; j++)
+      dist[i][j] = graph[i][j];
+
+  /* Add all vertices one by one to
+    the set of intermediate vertices.
+    ---> Before start of an iteration, we
+    have shortest distances between all
+    pairs of vertices such that the shortest
+    distances consider only the
+    vertices in set {0, 1, 2, .. k-1} as
+    intermediate vertices.
+    ----> After the end of an iteration,
+    vertex no. k is added to the set of
+    intermediate vertices and the set
+    becomes {0, 1, 2, .. k} */
+  for (k = 0; k < V; k++) {
+    // Pick all vertices as source one by one
+    for (i = 0; i < V; i++) {
+      // Pick all vertices as destination for the
+      // above picked source
+      for (j = 0; j < V; j++) {
+        // If vertex k is on the shortest path from
+        // i to j, then update the value of dist[i][j]
+        if (dist[i][k] + dist[k][j] < dist[i][j])
+          dist[i][j] = dist[i][k] + dist[k][j];
+      }
+    }
+  }
+
+  // Print the shortest distance matrix
+  printSolution(dist);
+}
 
 // Function to print binary tree in 2D
 // It does reverse inorder traversal
@@ -688,6 +832,7 @@ void main44() {
     ola = ins(array[i - 1], ola);
 
   AVL1 resul = fromlist(ola, N);
+  convert(resul);
   print2DUtil(resul, 0);
 }
 
