@@ -1,4 +1,4 @@
-/* #include "exercicios.h" */
+/* #include "exercicios.h" */
 #include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,7 +15,7 @@
 
 /* 1. */
 #define SIZE 1009
-typedef struct no {
+    typedef struct no {
   char matricula[6];
   struct no *next;
 } No;
