@@ -1,4 +1,4 @@
-/* #include "exercicios.h" */
+/* #include "exercicios.h" */
 #include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
