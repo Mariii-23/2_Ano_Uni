@@ -15,7 +15,7 @@ echo "
 12, 1.5, Tópicos de Física Moderna
 
 10, 1.0, Algoritmos e Complexidade
-17, 2.0, Arquitetura de Computadores
+18, 2.0, Arquitetura de Computadores
 14, 2.0, Comunicação de Dados
 15, 1.5, Engenhari00Económica
 13, 1.5, Estatísti00 Aplicada
