@@ -1,0 +1,7 @@
+#+TITLE: Notes
+
+* [[https://videoconf-colibri.zoom.us/wc/87812232411/join?track_id=&jmf_code=&meeting_result=&tk=&cap=undefined&refTK=&wpk=wcpk7a4b8a4ca212c63ea5c5a43af2fc0dac][Zoom]]
+* [[https://haslab.github.io/CP/][CP - Cálculo de Programas]]
+* Avaliação:
++ Trabalho: 40%
++ Teste: 60% (nota mínima 8 valores)
