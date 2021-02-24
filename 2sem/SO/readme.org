@@ -1,0 +1,2 @@
+* mail do stor : jtpaulo@di.uminho.pt
+* en.wikipedia.org/wiki/File-system_permissions 

@@ -1,0 +1,14 @@
+#+TITLE: Aulas
+
+* 24-02
+
+#+begin_SRC java
+public
+class Ola_mundo {
+public
+  static void main(String[] args) { System.out.print("Ola Mundo!"); }
+}
+#+end_SRC
+
+#+RESULTS:
+: Ola Mundo!

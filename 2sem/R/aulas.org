@@ -1,0 +1,80 @@
+#+TITLE: Aulas
+
+* 23-02-2020 -> Apresentação
+** Avaliação:
++ 2 testes (50%)
+** R with emacs
+*** Term
+> M-x "R"
+*** C-c C-e
+*** C-c C-c ??
+
+** R
+#+begin_SRC R
+
+x<-4
+y<-10
+class(y)
+z<-5L
+typeof(z)x<-4
+
+# vetor
+plot(2:8)
+
+table(c(4,4,4,5,6,7,7,7,7,7,7,5))
+
+plot(table(c(4,4,4,5,6,7,7,7,7,7,7,5)))
+    
+meu.vetor<-c(4,5)
+length(meu.vetor)
+class(meu.vetor)
+# estrutura do objeto
+str(meu.vetor) 
+
+# coerção implicita
+(vec<-c("Maria",4))
+class(vec)
+
+# coerçao implicita
+(vec2<-c(4,False,True)) 
+class(vec2)
+
+# coerçao explicita
+as.numeric(False)
+
+as.numeric("jao")
+
+# devolve NA (Not available) -> Falta de informação
+
+class(NA)
+typeof(NA)
+
+# Function
+f <- function() {
+  ##some
+  print("Hello World!")
+  print("LinuxHint")
+  print(5+6)
+ }
+
+
+v<-c(8,9,7,45,7,8,9,2)
+length(v)
+# media
+# seew information about mean
+mean(v)
+
+# notacao rapida para sequencias
+2:8
+8:2
+
+# passar argumentos por posicao
+# start end espacamento
+seq(0,1,0.05)
+seq(0,1,length.out=10)
+
+# funcao search()
+
+#+end_SRC
+
+#+RESULTS:
