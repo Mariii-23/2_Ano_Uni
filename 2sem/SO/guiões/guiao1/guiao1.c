@@ -58,12 +58,14 @@ void my_cat() {
   free(buffer);
 }
 
+/* ??!! */
 ssize_t readln(int fd, char *line, size_t size) {
   ssize_t bytes_read, failed = 0;
   /* void *line_aux = malloc(size); */
   char *line_aux = malloc(size * sizeof(char));
   size_t i = 0;
-  while (size > i && (bytes_read = read(fd, line_aux, sizeof(char)) > 0) &&
+  while (size > i &&
+         (bytes_read = read(fd, line_aux, 4 /* sizeof(char)*/) > 0) &&
          (strcmp(line_aux, "\n"))) {
     line[i] = line_aux[i];
     i++;

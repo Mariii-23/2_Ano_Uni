@@ -1,5 +1,6 @@
 /* #include "main.h" */
 #include "guiao1.h"
+#include "pessoas.h"
 #include <fcntl.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -8,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main() {
+int main_exer() {
   /* Exercise 1  */
   printf("\n\n§§§§§§§§§§§§§§§§§\n\n     EXERCISE 1 \n\n");
 
@@ -45,4 +46,24 @@ int main() {
   close(fd_source);
 
   return 0;
+}
+
+void help() {
+  printf("To run exercises:\n./pessoas -e\n");
+  printf("\nWorking on updates.....\n");
+}
+
+int main(int argc, char *argv[]) {
+  int faile = 0;
+  if (argc < 2 || argc > 4) {
+    help();
+    faile = 1;
+  } else if (argc == 2 && argv[1][1] == 'e')
+    main_exer();
+  else {
+    /* unsigned char option = argv[1][1]; */
+    argv = argc > 2 ? argv + 2 : NULL;
+    main_pessoas(argc - 2, argv);
+  }
+  return faile;
 }
