@@ -9,8 +9,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_BUF 1024
-
 int my_cp(const char *source, const char *destiny) {
   int failed = 0;
 
@@ -61,9 +59,16 @@ void my_cat() {
 }
 
 ssize_t readln(int fd, char *line, size_t size) {
-  ssize_t failed = 0;
+  ssize_t bytes_read, failed = 0;
+  /* void *line_aux = malloc(size); */
   char *line_aux = malloc(size * sizeof(char));
-
+  size_t i = 0;
+  while (size > i && (bytes_read = read(fd, line_aux, sizeof(char)) > 0) &&
+         (strcmp(line_aux, "\n"))) {
+    line[i] = line_aux[i];
+    i++;
+  }
+  failed = i < size ? i : 0;
   return failed;
 }
 

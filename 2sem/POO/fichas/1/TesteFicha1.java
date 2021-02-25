@@ -1,12 +1,13 @@
 package Ficha1;
+// import Ficha1.java;
 import java.util.Scanner;
 
 public class TesteFicha1 {
   private static Scanner ins;
-  private static Ficha1 f1;
+
+  // Ficha1 f1 = new Ficha1();
 
   public static void main(String[] args) {
-    f1 = new Ficha1();
     Scanner ins = new Scanner(System.in);
     ins = new Scanner(System.in);
 
@@ -17,7 +18,8 @@ public class TesteFicha1 {
   private static void exer1() {
     System.out.println("Temperatura em graus Celsius: ");
     double tempC = ins.nextDouble();
-    double tempF = f1.celsiusParaFarnheit(tempC);
+    Ficha1 f1 = new Ficha1();
+    double tempF = f1.celsiusParaFarenheit(tempC);
     System.out.println("Temperatura em Farnheit: " + tempF);
   }
 }
