@@ -1,21 +1,10 @@
-#+TITLE: Aulas
-
-* 24-02
-
-#+begin_SRC java
-public
-class Ola_mundo {
-public
-  static void main(String[] args) { System.out.print("Ola Mundo!"); }
-}
-#+end_SRC
-
-#+RESULTS:
-: Ola Mundo!
-* 26-02
-#+begin_SRC java
 public
 class aula2 {
+
+    public static void main(String[] args) {
+        System.out.print("success");
+    }
+
 public
   static void main() {
     String[] array = {"Sandes de Atum", "Chocolate", "Arroz"};
@@ -37,7 +26,3 @@ public
     System.out.print(sfinal);
   }
 }
-#+end_SRC
-
-#+RESULTS:
-: success
