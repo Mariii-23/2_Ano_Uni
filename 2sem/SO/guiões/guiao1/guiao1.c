@@ -60,18 +60,27 @@ void my_cat() {
 
 /* ??!! */
 ssize_t readln(int fd, char *line, size_t size) {
-  ssize_t bytes_read, failed = 0;
-  /* void *line_aux = malloc(size); */
-  char *line_aux = malloc(size * sizeof(char));
-  size_t i = 0;
-  while (size > i &&
-         (bytes_read = read(fd, line_aux, 4 /* sizeof(char)*/) > 0) &&
-         (strcmp(line_aux, "\n"))) {
-    line[i] = line_aux[i];
+  ssize_t i = 0;
+  ssize_t bytes_read;
+  while (i < size && (bytes_read = read(fd, &line[i], 1)) > 0 &&
+         line[i] != '\n')
     i++;
-  }
-  failed = i < size ? i : 0;
-  return failed;
+  line[i++] = '\n';
+  return i;
+}
+
+/* Mudar */
+ssize_t readln2(int fd, char *line, size_t size) {
+  ssize_t bytes_read = read(fd, line, size);
+
+  size_t line_len;
+  for (line_len = 0; line[line_len] != '\n' && line_len < bytes_read;
+       line_len++)
+    ;
+  line[line_len++] = '\n';
+
+  lseek(fd, line_len - bytes_read, SEEK_CUR);
+  return line_len;
 }
 
 int my_print(const char *source) {
