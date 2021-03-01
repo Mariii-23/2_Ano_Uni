@@ -58,7 +58,6 @@ void my_cat() {
   free(buffer);
 }
 
-/* ??!! */
 ssize_t readln(int fd, char *line, size_t size) {
   ssize_t i = 0;
   ssize_t bytes_read;
@@ -69,7 +68,7 @@ ssize_t readln(int fd, char *line, size_t size) {
   return i;
 }
 
-/* Mudar */
+/* Mudar ????? */
 ssize_t readln2(int fd, char *line, size_t size) {
   ssize_t bytes_read = read(fd, line, size);
 
@@ -80,6 +79,7 @@ ssize_t readln2(int fd, char *line, size_t size) {
   line[line_len++] = '\n';
 
   lseek(fd, line_len - bytes_read, SEEK_CUR);
+  /* lseek(fd, line_len, SEEK_CUR); */
   return line_len;
 }
 

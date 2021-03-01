@@ -43,6 +43,13 @@ int main_exer() {
     printf("%s\n", buffer3);
   else
     printf("Something went wrong\n");
+
+  char buffer4[MAX_BUF];
+  ssize_t exer4 = readln2(fd_source, buffer4, MAX_BUF);
+  if (exer4 != 0)
+    printf("%s\n", buffer4);
+  else
+    printf("Something went wrong\n");
   close(fd_source);
 
   return 0;

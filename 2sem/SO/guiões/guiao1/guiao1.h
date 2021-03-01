@@ -12,6 +12,7 @@
 int my_cp(const char *source, const char *destiny);
 void my_cat();
 ssize_t readln(int fd, char *line, size_t size);
+ssize_t readln2(int fd, char *line, size_t size);
 int my_print(const char *source);
 
 #endif // __GUIAO1_H_
