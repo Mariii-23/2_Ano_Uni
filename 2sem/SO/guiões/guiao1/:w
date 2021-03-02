@@ -50,10 +50,8 @@ void added_person(Person self) {
     perror("open");
   }
 
-  char buffer[MAX_BUF];
-  snprintf(buffer, sizeof(buffer), "\"%s\" %d\n", self.name, self.age);
-  /* asprintf(&buffer, "%s %d", self.name, self.age); */
-  free(buffer);
+  char *buffer;
+  snprintf(buffer, sizeof(buffer), "%s %d", self.name, self.age);
 }
 
 /* Program */

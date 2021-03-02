@@ -9,7 +9,19 @@
 *** C-c C-e
 *** C-c C-c ??
 
+*** Esc-p Previous Command (at command line)
+*** Esc-n Next Command (at command line)
+*** C-c C-v Get help on R/S object (enter name in
+*** C-c C-d Dump object or function to a Emacs buffer for editing
+*** C-c C-l Load file from buffer into R
+*** C-c C-f submit a Function in current buffer to R
+*** C-c C-j submit the current line in buffer to R
+*** C-c C-r submit the highlignted or marked region to R
+*** C-c TAB complete object/file name
+*** C-h m for help on ESS mode
+
 ** R
+*** 1 aula
 #+begin_SRC R
 
 x<-4
@@ -78,3 +90,19 @@ seq(0,1,length.out=10)
 #+end_SRC
 
 #+RESULTS:
+*** 2 aula
+#+begin_SRC R
+
+# vetores com inteiros
+v <- c(3L,5L,7L)
+
+idades <- c(3L, 20L,NA, 33L, 44L, NA,100L)
+# verifica se existem Na no array
+is.na(idades)
+
+#+end_SRC
+
+#+RESULTS:
+| 3 |
+| 5 |
+| 7 |

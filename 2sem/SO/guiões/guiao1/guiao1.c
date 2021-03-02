@@ -64,7 +64,7 @@ ssize_t readln(int fd, char *line, size_t size) {
   while (i < size && (bytes_read = read(fd, &line[i], 1)) > 0 &&
          line[i] != '\n')
     i++;
-  line[i++] = '\n';
+  /* line[i++] = '\n'; */
   return i;
 }
 

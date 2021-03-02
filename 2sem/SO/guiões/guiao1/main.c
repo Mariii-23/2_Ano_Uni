@@ -61,10 +61,10 @@ void help() {
 }
 
 int main(int argc, char *argv[]) {
-  int faile = 0;
+  int fail = 0;
   if (argc < 2 || argc > 4) {
     help();
-    faile = 1;
+    fail = 1;
   } else if (argc == 2 && argv[1][1] == 'e')
     main_exer();
   else {
@@ -72,5 +72,5 @@ int main(int argc, char *argv[]) {
     argv = argc > 2 ? argv + 2 : NULL;
     main_pessoas(argc - 2, argv);
   }
-  return faile;
+  return fail;
 }
