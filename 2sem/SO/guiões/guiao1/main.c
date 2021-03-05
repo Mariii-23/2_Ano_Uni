@@ -44,6 +44,8 @@ int main_exer() {
   else
     printf("Something went wrong\n");
 
+  printf("Readln2\n\n");
+
   char buffer4[MAX_BUF];
   ssize_t exer4 = readln2(fd_source, buffer4, MAX_BUF);
   if (exer4 != 0)
@@ -65,12 +67,30 @@ int main(int argc, char *argv[]) {
   if (argc < 2 || argc > 4) {
     help();
     fail = 1;
-  } else if (argc == 2 && argv[1][1] == 'e')
-    main_exer();
-  else {
-    /* unsigned char option = argv[1][1]; */
-    argv = argc > 2 ? argv + 2 : NULL;
-    main_pessoas(argc - 2, argv);
+  } else {
+    switch (argv[1][1]) {
+    case ('e'):
+      if (argc == 2)
+        main_exer();
+      else
+        help();
+      break;
+    case ('i'):
+      added_name_age(argv[3], argv[2]);
+      break;
+    case ('p'):
+      change_age(argv[3], argv[2]);
+      break;
+    default:
+      help();
+    }
   }
+  /* if (argc == 2 && argv[1][1] == 'e') */
+  /*   main_exer(); */
+  /* else { */
+  /*   /\* unsigned char option = argv[1][1]; *\/ */
+  /*   argv = argc > 2 ? argv + 2 : NULL; */
+  /*   main_pessoas(argc - 2, argv); */
+  /* } */
   return fail;
 }

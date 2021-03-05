@@ -1,2 +1,16 @@
 * mail do stor : jtpaulo@di.uminho.pt
 * en.wikipedia.org/wiki/File-system_permissions
+
+
+
+#+begin_SRC C
+int main(int agrc, char const *argv[]) {
+
+  int fd = open(argv[1], O_RDONLY, 0664);
+
+  if (fd < 0) {
+    perror("Open error: ");
+    printf("Open error: errno: %d texto %s", errno, strerror(errno));
+  }
+}
+#+end_SRC

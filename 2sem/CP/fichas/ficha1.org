@@ -1,0 +1,58 @@
+#+TITLE: Ficha1
+
+* 1.
+** a)
+*** 1)
+\begin{align*}
+    &(f . g) x\\
+= \{\ &(f.g)x=f(gx) \ (72);\ g(x)=x+1\ (pelo \ enunciado) \ \}\\
+    &f(x+1)\\
+= \{\ &fx = 2x \ (pelo enunciado) \ \}\\
+    &2(x+1)\\
+= \{\ &trivial \ \}\\
+    &2x+2\\
+\end{align*}
+
+*** 2)
+\begin{align*}
+    &(f . g) x\\
+= \{\ &(f.g)x=f(g(x))\ (72);\ g(x)=2x \ \}\\
+    &f(2x)\\
+= \{\ &fx= succ\ (72)\ \}\\
+    &2x + 1
+\end{align*}
+*** 3)
+nao ta feito
+*** 4)
+\begin{align*}
+    &(f.g)x=f(gx)\\
+= \{\ &(f.g)x=f(gx)\ (72);\ g(x,y)=x+y\ (pelo\ enunciado) \ \}\\
+    &f(x+y)\\
+= \{\ &fx=succ(2x) \ \}\\
+    &succ(2(x+y))\\
+= \{\ &trivial\ \}\\
+    &2x+2y+1
+\end{align*}
+** b)
+\begin{align*}
+    &(f.g)x=f(gx)\\
+= \{\ &Igualdade\ extensional\ (71) \ \}\\
+    &((f.g).h)x=(f(g.h)).x \\
+= \{\ &(72)\ Duas\ vezes\ \}\\
+    &(f.g)(hx)=f((g.h).x) \\
+= \{\ &(72)\ Duas\ vezes\ \}\\
+    &f(g(hx))=f(g(hx)) \\
+\end{align*}
+
+* 2)
+\begin{align*}
+    &(f \times g)(fx,gy)=(fx,gy)\\
+\\
+    &(f \times g)(x,g)\\
+\Leftrightarrow \{\ &F_1\ (10)\ do\ formulario \ \}\\
+    &<f\circ\pi_1.g\circ\pi_2>(x,y)\\
+\Leftrightarrow \{\ &<f.g>=(fx,gy)\ (76)\ \}\\
+    &((f\circ\pi_1(x,y)).(g\circ\pi_2(x,y)))\\
+\Leftrightarrow \{\ &(72)\ 2\ vezes \ \}\\
+    &(f(\pi_1(x,y))\circ(g(\pi_2(x,y))\\
+\end{align*}

@@ -7,6 +7,7 @@
 #define PATH "try.txt"
 #define COPY "try2.txt"
 
+/* #define MAX_BUF 1024 */
 #define MAX_BUF 1024
 
 int my_cp(const char *source, const char *destiny);

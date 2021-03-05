@@ -64,7 +64,7 @@ ssize_t readln(int fd, char *line, size_t size) {
   while (i < size && (bytes_read = read(fd, &line[i], 1)) > 0 &&
          line[i] != '\n')
     i++;
-  /* line[i++] = '\n'; */
+  line[i++] = '\n';
   return i;
 }
 
@@ -82,6 +82,56 @@ ssize_t readln2(int fd, char *line, size_t size) {
   /* lseek(fd, line_len, SEEK_CUR); */
   return line_len;
 }
+
+/* Prof */
+ssize_t readl3(int fd_in, int fd_out) {
+  ssize_t bytes_read;
+  char *buffer = (char *)malloc(MAX_BUF * sizeof(char));
+  int new_line = 1;
+  char line_number[10];
+  int line_counter = 0;
+
+  while ((bytes_read = readln(fd_in, buffer, MAX_BUF)) > 0) {
+    char line_number[10] = "";
+    // nl skips empty lines
+    if (new_line && buffer[0] != '\n') {
+      snprintf(line_number, 10, "%d:", line_counter);
+      write(fd_out, line_number, sizeof(line_number));
+      line_counter++;
+    }
+    write(fd_out, buffer, bytes_read);
+
+    // buffer was not big enougth to hold the whole line
+    // continue reading the line
+    if (buffer[bytes_read - 1] != '\n')
+      new_line = 0;
+    else
+      new_line = 1;
+  }
+  return 0;
+}
+
+/* ssize_t readc(int fd, char *buffer) { */
+
+/*   if (read_buffer_pos == read_buffer_end) { */
+/*     read_buffer_end = read(fd, read_buffer, MAX_BUF); */
+/*     switch (read_buffer_end) { */
+/*     case -1: */
+/*       perror("read:"); */
+/*       return -1; */
+/*       break; */
+/*     case 0: */
+/*       return 0; */
+/*       break; */
+/*     default: */
+/*       read_buffer_pos = 0; */
+/*     } */
+/*   } */
+/*   *buffer = read_buffer[read_buffer_pos]; */
+/*   read_buffer_pos++; */
+
+/*   return 1; */
+/* } */
 
 int my_print(const char *source) {
   int failed = 0;

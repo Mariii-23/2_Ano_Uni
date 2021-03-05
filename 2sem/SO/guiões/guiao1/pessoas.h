@@ -1,10 +1,16 @@
 #ifndef __PESSOAS_H_
 #define __PESSOAS_H_
-
+#define _BSD_SOURCE
+#include "guiao1.h"
+#include <sys/types.h>
+/* chamadas ao sistema: defs e decls essenciais */
+#include <unistd.h>
+/* O_RDONLY, O_WRONLY, O_CREAT, O_* */
 #include <assert.h>
-#include <stddef.h>
-#include <stdint.h>
+#include <fcntl.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define FILE_PATH "data.txt"
 
@@ -33,4 +39,7 @@ void dynamic_push(Dynamic *self, Person pessoa);
 
 void dynamic_free(Dynamic *self);
 void main_pessoas(int N, char *argv[]);
+
+void added_name_age(char *age, char *name);
+void change_age(char *age, char *name);
 #endif // __PESSOAS_H_
