@@ -20,9 +20,9 @@ f
 tmp <- c(4, 6, 3)
 tmp
 #### a
-tmpa <- rep(tmp, 4)
+tmpa <- rep(tmp, 10)
 tmpa
-#### b ???
+#### b
 tmpb <- append((rep(tmp, 10)), tmp[1])
 tmpb
 #### c
@@ -31,10 +31,29 @@ tmpc
 
 ### 3
 #### a
-## ?????
-## f_x <- 3^x
+tmp3 <- c()
+for (i in 0:31) {
+  tmp3 <- append(tmp3, sum(3^i))
+}
+tmp3
+# Or
+tmp3 <- c(1, 3)
+for (i in 3:31) {
+  tmp3 <- append(tmp3, 3 * tmp3[i - 1])
+}
+tmp3
 
-## arr<- apply(c(0:31),c(3),^) ; arr
+# GeometricSequence(4, .8, .6)
+
+#### b
+#### ???
+
+#### c
+tmp <- c(2)
+for (i in 2:25) {
+  tmp <- append(tmp, 2^i / i)
+}
+tmp
 
 ### 4
 #### a
@@ -59,20 +78,40 @@ set.seed(50)
 (xVec <- sample(0:999, 250, replace = T))
 (yVec <- sample(0:999, 250, replace = T))
 (con <- c(T, F, F))
+####
 #### a
-Vec_a <- yVec - xVec
+Vec_a <- c()
+for (i in 1:(length(xVec) - 1)) {
+  Vec_a <- append(Vec_a, yVec[i + 1] - xVec[i])
+}
 Vec_a
+####
 #### b
-Vec_b <- sin(yVec) / cos(xVec)
+Vec_b <- c()
+for (i in 1:(length(xVec) - 1)) {
+  Vec_b <- append(Vec_b, sin(yVec[i]) / cos(xVec[i + 1]))
+}
 Vec_b
+####
 #### c
-## Vec_c<-
-
+tmp <- c()
+for (i in 1:(length(xVec)) - 3) {
+  aux <- xVec[i] + 2 * xVec[i + 1] - 3 * xVec[i + 3]
+  tmp <- append(tmp, aux)
+}
+tmp
+####
 #### d ???
-i <- 1:(length(xVec) + 1)
-e <- 20
+e <- 2
+tmp <- c(1 / (xVec[1] + 10))
+for (i in 2:(length(xVec))) {
+  tmp <- append(tmp, tmp[i - 1] + e^(-1 * xVec[i + 1]) / (xVec[i] + 10))
+}
+tmp
 sum(e^(-1 * xVec[i + 1]) / (xVec[i] + 10))
 
+tmp <- (seq(yVec[2] - xVec[1]:yVec[length(yVec)] - xVec[length(xVec - 1)]))
+tmp
 ### 9
 #### a
 subset(yVec, yVec > 600)
