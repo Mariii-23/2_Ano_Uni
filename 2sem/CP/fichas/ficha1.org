@@ -35,7 +35,7 @@ nao ta feito
 \end{align*}
 ** b)
 \begin{align*}
-    &(f.g)x=f(gx)\\
+    &((f.g).h)x=f(g(hx))\\
 = \{\ &Igualdade\ extensional\ (71) \ \}\\
     &((f.g).h)x=(f(g.h)).x \\
 = \{\ &(72)\ Duas\ vezes\ \}\\

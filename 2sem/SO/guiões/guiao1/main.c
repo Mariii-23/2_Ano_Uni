@@ -58,7 +58,9 @@ int main_exer() {
 }
 
 void help() {
-  printf("To run exercises:\n./pessoas -e\n");
+  printf("To run exercises:./pessoas -e\n");
+  printf("To run added pessoas:./pessoas -i \"Pessoa\" idade\n");
+  printf("To change pessoa:./pessoas -p \"Pessoa\" idade\n");
   printf("\nWorking on updates.....\n");
 }
 
@@ -80,6 +82,9 @@ int main(int argc, char *argv[]) {
       break;
     case ('p'):
       change_age(argv[3], argv[2]);
+      break;
+    case ('v'):
+      print_pessoas();
       break;
     default:
       help();

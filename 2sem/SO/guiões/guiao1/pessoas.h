@@ -15,7 +15,7 @@
 #define FILE_PATH "data.txt"
 
 typedef struct person {
-  char *name;
+  char name[100];
   int age;
 } Person;
 
@@ -42,4 +42,5 @@ void main_pessoas(int N, char *argv[]);
 
 void added_name_age(char *age, char *name);
 void change_age(char *age, char *name);
+void print_pessoas();
 #endif // __PESSOAS_H_

@@ -19,6 +19,7 @@ public class main {
     int id_aluno = 0;
     int id_uc = 0;
     int voltas = 0;
+    int nota_acima=15;
 
     Alunos Alunos = new Alunos(array);
 
@@ -38,6 +39,7 @@ public class main {
       // Somar todos os elementos de uma cadeira.
       System.out.println("Soma de todas as notas da cadeira com id = " + id_uc + " : " + Alunos.somar_notas_cadeira(id_uc));
       // Media dessa cadeira
+
       System.out.println("Média das notas da cadeira com id = " + id_uc + " : " + Alunos.media_uc(id_uc));
       System.out.println();
 
@@ -65,6 +67,9 @@ public class main {
       System.out.println(Arrays.toString(Alunos.min_nota_cadeiras()));
       System.out.println();
 
+      System.out.println("Somatório de todas as notas: "+Alunos.soma_notas());
+
+      System.out.println("Notas acima de "+nota_acima+":\n"+Arrays.toString(Alunos.get_notas_acima_de(nota_acima)));
 
       linhas = 5;
       colunas = 10;
