@@ -121,7 +121,7 @@ public class Alunos {
    */
   public int[] get_one_Linha(int linha) {
     if (turma != null && linha < turma.length)
-      return turma[linha];
+      return turma[linha].clone();
     else
       return null;
   }
@@ -207,6 +207,20 @@ public class Alunos {
     //for(int i=0; i < this.getLinhas(); i++)
     //   result+=getElem(i , uc);
     return result;
+  }
+
+  /**
+   * Método que cálcula todas as motas de todos os alunos e cadeiras.
+   * @return Somatório.
+   */
+  public int soma_notas(){
+    int resul=0;
+    if( turma != null ){
+      for(int[] linha : getTurma())
+        for(int elem: linha)
+        resul += elem;
+    }
+    return resul;
   }
 
   /**
@@ -341,16 +355,24 @@ public class Alunos {
     return result;
   }
 
-  // num ta feito
+  /**
+   * Método que devolve todas as notas superios a um dado valor.
+   * @param value Valor a ser analisado.
+   * @return Array com as notas superiores a esse valor dado.
+   */
   public int[] get_notas_acima_de(int value) {
-    int[] array = new int[getColunas()];
-    int[] resul;
-    int i = 0;
-    ///
-    return array;
+    int[] resul = new int[getColunas()*getLinhas()];
+    int i =0;
+    for (int[] linha: getTurma()){
+      for(int elem : linha){
+        if(elem > value)
+          resul[i++]=elem;
+      }
+    }
+    int[] final_ = new int[i];
+    System.arraycopy(resul, 0, final_, 0, i);
+    return final_;
   }
-
-  /* falta o g e o h */
 
   /**
    * @param args

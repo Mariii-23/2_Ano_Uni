@@ -1,59 +1,42 @@
 ### 1
+#### a
 (a <- c(1:30))
+#### b
+(b <- c(1:30, 29:1))
+#### c
+(c <- seq(1, 30, 2))
+#### d
+(d <- seq(29, 1, -2))
+#### e
+(e <- rep(1:5, times = 1:5))
+#### f
+(f <- rep(c(TRUE, FALSE, TRUE), times = c(2, 5, 1)))
 
-b <- c(1:30, 29:1)
-b
-
-ec <- seq(1, 30, 2)
-ec
-
-d <- seq(29, 1, -2)
-d
-
-e <- rep(1:5, times = 1:5)
-e
-
-f <- rep(c(TRUE, FALSE, TRUE), times = c(2, 5, 1))
-f
 
 ### 2
-tmp <- c(4, 6, 3)
-tmp
+(tmp <- c(4, 6, 3))
+
 #### a
-tmpa <- rep(tmp, 10)
-tmpa
+(tmpa <- rep(tmp, 10))
 #### b
-tmpb <- append((rep(tmp, 10)), tmp[1])
-tmpb
+(tmpb <- append((rep(tmp, 10)), tmp[1]))
 #### c
-tmpc <- rep(tmp, times = c(10, 20, 30))
-tmpc
+(tmpc <- rep(tmp, times = c(10, 20, 30)))
+
 
 ### 3
 #### a
-tmp3 <- c()
-for (i in 0:31) {
-  tmp3 <- append(tmp3, sum(3^i))
-}
-tmp3
-# Or
-tmp3 <- c(1, 3)
-for (i in 3:31) {
-  tmp3 <- append(tmp3, 3 * tmp3[i - 1])
-}
-tmp3
-
-# GeometricSequence(4, .8, .6)
+ia <- 0:31
+(tres_a <- c(3^ia))
 
 #### b
-#### ???
+ib <- 1:36
+(tres_b <- c(0.1^(ib + 2) * 0.2^ib))
 
 #### c
-tmp <- c(2)
-for (i in 2:25) {
-  tmp <- append(tmp, 2^i / i)
-}
-tmp
+ic <- 2:25
+(tres_c <- c(2, (2^ic) / ic))
+
 
 ### 4
 #### a
@@ -65,85 +48,154 @@ i <- 1:25
 sum(2^i / i + 3^i / i^2)
 
 ### 5
-v5 <- c(1:30)
+(v5 <- c(1:30))
+
 ### 6
-v6 <- paste("label", v5)
-v6
+(v6 <- paste("label", v5))
+
 ### 7
-v7 <- paste("fin", v5, sep = "")
-v7
+(v7 <- paste("fin", v5, sep = ""))
+
 
 ### 8
 set.seed(50)
 (xVec <- sample(0:999, 250, replace = T))
 (yVec <- sample(0:999, 250, replace = T))
 (con <- c(T, F, F))
-####
+
 #### a
-Vec_a <- c()
-for (i in 1:(length(xVec) - 1)) {
-  Vec_a <- append(Vec_a, yVec[i + 1] - xVec[i])
-}
-Vec_a
-####
+ia <- 1:(length(xVec) - 1)
+(vector_a <- c(yVec[ia + 1] - xVec[ia]))
+# OR
+# arr[-n] -> Tirar o elemento na posição n
+# arr[c(1,n)] -> arr[1..n]
+# arr[-c(1,n)] -> arr sem os elementos dos indices 1..n
+n <- length(xVec)
+(vector_a1 <- yVec[-1] - xVec[-n])
+
 #### b
+ib <- 1:(length(xVec) - 1)
+(vector_b <- c(sin(yVec[ib]) / cos(xVec[ib + 1])))
+# OR
+n <- length(xVec)
+(vector_b1 <- sin(xVec[-n]) / cos(yVec[1]))
+## OR
 Vec_b <- c()
 for (i in 1:(length(xVec) - 1)) {
   Vec_b <- append(Vec_b, sin(yVec[i]) / cos(xVec[i + 1]))
 }
 Vec_b
-####
-#### c
-tmp <- c()
-for (i in 1:(length(xVec)) - 3) {
-  aux <- xVec[i] + 2 * xVec[i + 1] - 3 * xVec[i + 3]
-  tmp <- append(tmp, aux)
-}
-tmp
-####
-#### d ???
-e <- 2
-tmp <- c(1 / (xVec[1] + 10))
-for (i in 2:(length(xVec))) {
-  tmp <- append(tmp, tmp[i - 1] + e^(-1 * xVec[i + 1]) / (xVec[i] + 10))
-}
-tmp
-sum(e^(-1 * xVec[i + 1]) / (xVec[i] + 10))
 
-tmp <- (seq(yVec[2] - xVec[1]:yVec[length(yVec)] - xVec[length(xVec - 1)]))
-tmp
+#### c
+ic <- 1:(length(xVec) - 2)
+(vector_c <- c(xVec[ic] + 2 * xVec[ic + 1] - xVec[ic + 2]))
+# OR
+(vector_c1 <- xVec[-c(n - 1, n)] + 2 * xVec[-c(1, n)] - xVec[-c(1, 2)])
+
+
+#### d
+id <- 1:length(xVec)
+(vector_d <- sum(exp(-xVec[id] + 1) / (xVec[id] + 10)))
+# OUTRA SOLUÇÃO
+n <- length(xVec)
+(d <- sum(exp(-xVec[-n] + 1) / (xVec[-n] + 10)))
+
+
 ### 9
 #### a
 subset(yVec, yVec > 600)
-(1:length(yVec)) * (yVec < 600)
-which(yVec < 600)
-#### c
-a <- (1:length(yVec)) * (yVec < 600)
-a
-b <- (1:length(xVec)) * (xVec < 600)
-b
-which(a == b)
+# OR
+(vector9_a <- yVec[yVec > 600])
+
+#### b
+(subset((vector9_b <- (1:length(yVec)) * (yVec > 600)), vector9_b != 0))
+# OR
+which(yVec > 600)
+
+#### c ??
+## (x_c <- (1:length(yVec)) * (yVec > 600))
+## (y_c <- (1:length(xVec)) * (xVec > 600))
+x_c <- xVec > 600
+y_c <- yVec > 600
+which(x_c[x_c == y_c])
+
 #### d
-(x_ <- mean(xVec))
-(vector <- (abs(xVec - x_))^(1 / 2))
-#### e
-(e <- (yVec) * (yVec > 200))
-e[e != 0] # Valores sem os 0
+(x_d <- mean(xVec))
+(vector9_d <- (abs(xVec - x_d))^(1 / 2))
+
+#### e ???
+(x_e <- (yVec) * (yVec > 200))
+x_e[x_e != 0] # Valores sem os 0
+# OR
+(x_e <- yVec[yVec > 200])
+
+#
+aux1 <- yVec[yVec > 200]
+aux2 <- yVec[yVec < 200]
+length(c(aux1[aux1 < max(xVec)], aux2[aux2 > max(xVec)]))
+
 #### f
-(f <- (yVec * (yVec %% 2)))
-f[f != 0] # Valores sem os 0
+(x_f <- (yVec * (yVec %% 2)))
+x_f[x_f != 0] # Valores sem os 0
+
 #### g
 #### ???
 (a <- sort(xVec))
 (b <- sort(yVec))
 (resul <- ((a) * (a == b)))
 resul[resul != 0]
+
 #### h
-yVec
-# length(yVec)
-(con <- append(rep(c(TRUE, FALSE, FALSE), length(yVec) / 3), TRUE))
-# length(con)
-(resul <- yVec * con)
-resul[resul != 0]
+(ola <- yVec[seq(1, n, 3)])
 
 ### 10
+(x <- c(1:100))
+(vector_10 <- subset(x, x %% 2 != 0 & x %% 3 != 0 & x %% 7 != 0))
+
+### 11
+(queue <- c("Sara", "Rui", "Ana", "Luis"))
+
+#### a
+(queue <- append(queue, "Beatriz"))
+#### b
+(queue_q <- queue[-(which(queue == "Sara"))])
+#### c
+(queue <- append("Paulo", queue))
+#### d
+(queue_q <- queue[-(which(queue == "Beatriz"))])
+#### e
+(queue_q <- queue[-(which(queue == "Ana"))])
+#### f
+(which(queue == "Rui"))
+
+### 12
+## remove (almost) everything in the working environment.
+## You will get no warning, so don't do this unless you are really sure.
+(rm(list = ls()))
+# x = 1
+(x <- 1)
+# Cria uma lista vazia
+(y <- c())
+# O elemento na posição 2 passa a ter o valor de 2
+(y[2] <- 2)
+y
+# O elemento na posição 3 passa a ter o mesmo valor
+# que o elemento na posicão 1
+# Neste caso é Null porque ainda não atribuimos nada
+# ao elemento na posição 1.
+(y[3] <- y[1])
+y
+
+# O elemento na posição 2 passa a ter o mesmo valor
+# que o elemento na posicão 4
+(y[2] <- y[4])
+y
+
+# Z ainda nao foi declarado, logo da erro.
+(z[1] <- 0)
+
+### 13
+(num <- seq(2, 38, 2))
+(den <- seq(3, 39, 2))
+cumprod(num[1:3] / den[1:3])
+sum(cumprod(num / den))

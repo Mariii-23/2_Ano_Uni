@@ -106,3 +106,8 @@ is.na(idades)
 | 3 |
 | 5 |
 | 7 |
+*** 3 aula
+#+begin_SRC R
+# diferenca entre & e &&
+## & faz com os vectores e && faz apenas para o primeiro elemento
+#+end_SRC
