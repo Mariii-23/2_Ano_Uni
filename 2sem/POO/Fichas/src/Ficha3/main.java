@@ -49,17 +49,17 @@ public class main {
     clone.setVisitado("BATATA3");
     System.out.println(clone.toString());
     clone.goloVisitante();
-    System.out.println(clone.getVisitado() + " marcou GOLOOOOO. RESULTADO: " + clone.getPlacar().toString()+"\n");
+    System.out.println(clone.getVisitante() + " marcou GOLOOOOO. RESULTADO: " + clone.getPlacar().toString()+"\n");
     clone.goloVisitante();
-    System.out.println(clone.getVisitado() + " marcou GOLOOOOO. RESULTADO: " + clone.getPlacar().toString()+"\n");
+    System.out.println(clone.getVisitante() + " marcou GOLOOOOO. RESULTADO: " + clone.getPlacar().toString()+"\n");
 
     System.out.println(   jogo1.toString());
+    jogo1.goloVisitado();
+    jogo1.goloVisitado();
+    jogo1.goloVisitado();
+    jogo1.goloVisitado();
+    jogo1.goloVisitado();
     System.out.println(jogo1.getVisitado()+" MARCOU GOLOOOO. Resultado: "+ jogo1.getPlacar().toString()+"\n");
-    jogo1.goloVisitado();
-    jogo1.goloVisitado();
-    jogo1.goloVisitado();
-    jogo1.goloVisitado();
-    jogo1.goloVisitado();
 
     jogo1.endGame();
     jogo.endGame();

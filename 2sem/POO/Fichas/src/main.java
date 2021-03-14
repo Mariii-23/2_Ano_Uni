@@ -1,7 +1,7 @@
-import Ficha1.main_Ficha1;
+import Ficha3.Ficha3;
+import Ficha3.Jogo_Futebol;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class main {
   public static void main(String[] args) {
