@@ -111,3 +111,74 @@ is.na(idades)
 # diferenca entre & e &&
 ## & faz com os vectores e && faz apenas para o primeiro elemento
 #+end_SRC
+*** 4 aula
+**** If
+#+begin_SRC R
+if( condicao ){
+ Se a condicao for TRUE faz isto
+   ....
+} else {
+  Caso contrario faz isto
+    ....
+}
+#+end_SRC
+***** if com vetores
+#+begin_SRC R
+xx<-c(23,40,NA,50,NA)
+# ifesle(condicao, se true faz isto, se false faz isto)
+x<-ifelse(is.na(xx),99,xx)
+#+end_SRC
+
+#+RESULTS:
+| 23 |
+| 40 |
+| 99 |
+| 50 |
+| 99 |
+
+**** cat
+#+begin_SRC R
+temp_min <- -5
+cat("Introduza o valor da temperatura:")
+temp>-as.numeric(readline())
+
+if (temp < -5){
+  # Stop -> erro
+  stop("A temperatura não pode ser inferior a -5.")
+}
+else{
+  message("A temperatura não é inferior a -5 .")
+}
+#+end_SRC
+**** Operacoes logicas
+***** a && b
+Operacao logica com valores numericos
+Coercao implicita -- qualquer numero
+***** a & b
+Versao vetorizavel
+Avalia todas as entradas.
+**** Funcao
+#+begin_SRC R
+f <- function(x){
+  x<-ifelse(is.na(x),99,x+5)
+}
+
+f2 <- function(x){
+  ifelse(is.na(x),print("O valor é NA"),x+5)
+}
+r<-f(c(4,-9,NA))
+
+r1<-f2(c(4,-9,NA))
+
+ola<-append(r, c(" "))
+ola<-append(ola, r1)
+#+end_SRC
+
+#+RESULTS:
+|            9 |
+|           -4 |
+|           99 |
+|              |
+|            9 |
+|           -4 |
+| O valor é NA |
