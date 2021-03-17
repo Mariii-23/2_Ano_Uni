@@ -30,8 +30,9 @@ ia <- 0:31
 (tres_a <- c(3^ia))
 
 #### b
-ib <- 1:36
-(tres_b <- c(0.1^(ib + 2) * 0.2^ib))
+(i_first <- seq(from = 3, to = 36, by = 3))
+(i_second <- seq(from = 1, to = 34, by = 3))
+(tres_b <- c((0.1^i_first) * (0.2^i_second)))
 
 #### c
 ic <- 2:25
@@ -40,7 +41,7 @@ ic <- 2:25
 
 ### 4
 #### a
-i <- 1:100
+i <- 10:100
 sum(i^3 + 4 * i^2)
 
 #### b
@@ -61,7 +62,6 @@ sum(2^i / i + 3^i / i^2)
 set.seed(50)
 (xVec <- sample(0:999, 250, replace = T))
 (yVec <- sample(0:999, 250, replace = T))
-(con <- c(T, F, F))
 
 #### a
 ia <- 1:(length(xVec) - 1)
@@ -92,7 +92,6 @@ ic <- 1:(length(xVec) - 2)
 # OR
 (vector_c1 <- xVec[-c(n - 1, n)] + 2 * xVec[-c(1, n)] - xVec[-c(1, 2)])
 
-
 #### d
 id <- 1:length(xVec)
 (vector_d <- sum(exp(-xVec[id] + 1) / (xVec[id] + 10)))
@@ -112,9 +111,7 @@ subset(yVec, yVec > 600)
 # OR
 which(yVec > 600)
 
-#### c ??
-## (x_c <- (1:length(yVec)) * (yVec > 600))
-## (y_c <- (1:length(xVec)) * (xVec > 600))
+#### c
 x_c <- xVec > 600
 y_c <- yVec > 600
 which(x_c[x_c == y_c])
@@ -123,13 +120,13 @@ which(x_c[x_c == y_c])
 (x_d <- mean(xVec))
 (vector9_d <- (abs(xVec - x_d))^(1 / 2))
 
-#### e ???
+#### e
 (x_e <- (yVec) * (yVec > 200))
 x_e[x_e != 0] # Valores sem os 0
 # OR
 (x_e <- yVec[yVec > 200])
 
-#
+# ??
 aux1 <- yVec[yVec > 200]
 aux2 <- yVec[yVec < 200]
 length(c(aux1[aux1 < max(xVec)], aux2[aux2 > max(xVec)]))
@@ -146,6 +143,7 @@ x_f[x_f != 0] # Valores sem os 0
 resul[resul != 0]
 
 #### h
+n <- length(yVec)
 (ola <- yVec[seq(1, n, 3)])
 
 ### 10
@@ -158,13 +156,13 @@ resul[resul != 0]
 #### a
 (queue <- append(queue, "Beatriz"))
 #### b
-(queue_q <- queue[-(which(queue == "Sara"))])
+(queue <- queue[-(which(queue == "Sara"))])
 #### c
 (queue <- append("Paulo", queue))
 #### d
-(queue_q <- queue[-(which(queue == "Beatriz"))])
+(queue <- queue[-(which(queue == "Beatriz"))])
 #### e
-(queue_q <- queue[-(which(queue == "Ana"))])
+(queue <- queue[-(which(queue == "Ana"))])
 #### f
 (which(queue == "Rui"))
 
