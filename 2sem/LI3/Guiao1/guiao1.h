@@ -27,7 +27,7 @@ typedef struct review {
 
 typedef struct CSVReview {
   REVIEW *self;
-  struct CSReview *next;
+  struct CSVReview *next;
 } CSVREVIEW;
 
 typedef struct bussines {

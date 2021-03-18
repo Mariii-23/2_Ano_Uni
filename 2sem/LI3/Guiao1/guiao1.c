@@ -29,71 +29,74 @@ void print_file(char *name_in, int fd_out) {
 }
 
 // arroz.. nao da
-char **to_buffer(char *name) {
-  int fd, max = MAX_BUFFER;
-  char *buffer = malloc(MAX_BUFFER);
-  char **result = malloc(MAX_BUFFER * sizeof(char *));
-  int N = 0;
-  ssize_t bytes_read;
+// char **to_buffer(char *name) {
+//  int fd, max = MAX_BUFFER;
+//  char *buffer = malloc(MAX_BUFFER);
+//  char **result = malloc(MAX_BUFFER * sizeof(char *));
+//  int N = 0;
+//  ssize_t bytes_read;
+//
+//  if ((fd = open(name, O_RDONLY)) == -1) {
+//    perror("Open File source");
+//    return NULL;
+//  }
+//
+//  while ((bytes_read = read(fd, buffer, MAX_BUFFER)) > 0) {
+//
+//    if (N >= max) {
+//      max *= 2;
+//      result = realloc(result, max * sizeof(char *));
+//    }
+//    /* result[N++] = buffer; */
+//    write((*result[N++]), buffer, bytes_read);
+//    /* buffer = malloc(MAX_BUFFER); */
+//  }
+//
+//  close(fd);
+//  free(buffer);
+//
+//  return result;
+//}
 
-  if ((fd = open(name, O_RDONLY)) == -1) {
-    perror("Open File source");
-    return NULL;
-  }
-
-  while ((bytes_read = read(fd, buffer, MAX_BUFFER)) > 0) {
-
-    if (N >= max) {
-      max *= 2;
-      result = realloc(result, max * sizeof(char *));
-    }
-    /* result[N++] = buffer; */
-    write((*result[N++]), buffer, bytes_read);
-    /* buffer = malloc(MAX_BUFFER); */
-  }
-
-  close(fd);
-  free(buffer);
-
-  return result;
-}
-
-REVIEW *to_review(int fd) {
+void to_review(int fd, CSVREVIEW *self) {
   char buffer[MAX_BUFFER];
-  REVIEW *self = (REVIEW *)malloc(sizeof(REVIEW));
   ssize_t bytes_reads;
+  self->self = (REVIEW *)malloc(sizeof(struct review));
 
-  if ((bytes_reads = read(fd, &self, sizeof(REVIEW))) > 0) {
+  if ((bytes_reads = read(fd, &buffer, sizeof(REVIEW))) > 0) {
     char *buff2 = buffer;
 
-    strcpy(self->review_id, strsep(&buff2, ";"));
-    strcpy(self->user_id, strsep(&buff2, ";"));
-    strcpy(self->business_id, strsep(&buff2, ";"));
-    self->stars = atoi(strsep(&buff2, ";"));
-    self->useful = atoi(strsep(&buff2, ";"));
-    self->funny = atoi(strsep(&buff2, ";"));
-    self->cool = atoi(strsep(&buff2, ";"));
-  }
+    strcpy(self->self->review_id, strsep(&buff2, ";"));
+    strcpy(self->self->user_id, strsep(&buff2, ";"));
+    strcpy(self->self->business_id, strsep(&buff2, ";"));
+    self->self->stars = atoi(strsep(&buff2, ";"));
+    self->self->useful = atoi(strsep(&buff2, ";"));
+    self->self->funny = atoi(strsep(&buff2, ";"));
+    self->self->cool = atoi(strsep(&buff2, ";"));
+  } else
+    self = NULL;
   free(buffer);
-
-  return self;
 }
 
 CSVREVIEW *all_review(char *name) {
   int fd;
-  if ((fd = open(name, O_RDWR)) == -1) {
+  if ((fd = open(name, O_RDONLY)) == -1) {
     perror("open");
     return NULL;
   }
 
-  CSVREVIEW *all, *ei = all;
-  REVIEW *self;
+  CSVREVIEW *all = (CSVREVIEW *)malloc(sizeof(struct CSVReview)), *ei = all;
+  ei = (CSVREVIEW *)malloc(sizeof(struct CSVReview));
 
-  while ((self = to_review(fd)) != NULL) {
-    ei = (CSVREVIEW *)malloc(sizeof(struct CSVReview));
-    ei->self = self;
+  to_review(fd, ei);
+
+  while (ei->self != NULL) {
+    ei->next = (CSVREVIEW *)malloc(sizeof(CSVREVIEW));
     ei = ei->next;
+    ei = (CSVREVIEW *)malloc(sizeof(struct CSVReview));
+    to_review(fd, ei);
   }
+  ei->next = NULL;
 
   close(fd);
 
