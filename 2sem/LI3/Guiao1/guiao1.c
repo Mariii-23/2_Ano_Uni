@@ -85,18 +85,18 @@ CSVREVIEW *all_review(char *name) {
     return NULL;
   }
 
-  CSVREVIEW *all = (CSVREVIEW *)malloc(sizeof(struct CSVReview)), *ei = all;
-  ei = (CSVREVIEW *)malloc(sizeof(struct CSVReview));
+  CSVREVIEW *all = (CSVREVIEW *)malloc(sizeof(struct CSVReview)), **ei = &all;
+  /* ei = (CSVREVIEW *)malloc(sizeof(struct CSVReview)); */
 
-  to_review(fd, ei);
+  to_review(fd, *ei);
 
-  while (ei->self != NULL) {
-    ei->next = (CSVREVIEW *)malloc(sizeof(CSVREVIEW));
-    ei = ei->next;
-    ei = (CSVREVIEW *)malloc(sizeof(struct CSVReview));
-    to_review(fd, ei);
+  while ((*ei)->self != NULL) {
+    (*ei)->next = (CSVREVIEW *)malloc(sizeof(CSVREVIEW));
+    ei = &(*ei)->next;
+    *ei = (CSVREVIEW *)malloc(sizeof(struct CSVReview));
+    to_review(fd, *ei);
   }
-  ei->next = NULL;
+  (*ei)->next = NULL;
 
   close(fd);
 
