@@ -16,4 +16,4 @@ void ex3();
 void ex4();
 void ex5();
 
-#endif // __GUIAO2_H_
+#endif  // __GUIAO2_H_
