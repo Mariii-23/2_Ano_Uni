@@ -182,3 +182,22 @@ ola<-append(ola, r1)
 |            9 |
 |           -4 |
 | O valor é NA |
+*** 5 aula
+**** Funcao
+#+begin_SRC R
+f<-function(){
+  x<-1
+  x+5
+}
+
+body(f)
+formals(f) # NULL
+
+g<-function(a,b){
+x<-a^2
+print(x)
+y<-a+b
+c(x,y)
+}
+#+end_SRC
+

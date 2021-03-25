@@ -1,3 +1,15 @@
 #+TITLE: Notas
 
 * 01/03
+*
+#+begin_SRC c
+char *exec_args = {"/bin/ls", "-ls", NULL}
+
+ret = exec("/bin/ls", "/bin/ls", "-l", NULL);
+ret = execlp("ls", "/bin/ls", "-l", NULL);
+ret = execv("/bin/ls", exec_args);
+ret = execvp("ls", exec_args);
+
+printf("ola: %d\n", ret);
+perror("reached return");
+#+end_SRC

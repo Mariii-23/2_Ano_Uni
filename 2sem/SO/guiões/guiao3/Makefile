@@ -7,11 +7,15 @@ OPT = -flto -Ofast -march=native -mtune=native
 CFLAGS = -std=c17 -Wall -Wextra -Wdouble-promotion -Werror=pedantic -Werror=vla -pedantic-errors -Wfatal-errors -g $(OPT)
 # CFLAGS = -g
 CC = gcc
-OBJS = guiao2.o main.o
-NAME = guiao2
+OBJS = guiao.o main.o ex3.o
+EX3 = ex3.c
+NAME = guiao
+GUIAO = guiao.c main.c
+NAME1 = ex3
 
 all: $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $^
+	$(CC) $(CFLAGS) -o $(NAME1) ex3.o
+	$(CC) $(CFLAGS) -o $(NAME) $(GUIAO)
 
 run: all
 	./$(NAME)
