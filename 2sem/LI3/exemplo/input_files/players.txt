@@ -1,0 +1,17 @@
+Marega:11:Striker
+Aboubakar:9:Striker
+Fabio Silva:47:Striker
+Ze Luis:20:Striker
+Tiquinho:29:Striker
+Nakajima:10:Midfielder
+Danilo:22:Midfielder
+Baro:8:Midfielder
+Uribe:16:Midfielder
+Alex Telles:13:Defender
+Corona:17:Defender
+Pepe:3:Defender
+Marcano:5:Defender
+Manafa:18:Defender
+Diogo Costa:31:GK
+Marchesin:32:GK
+Casillas:1:GK
