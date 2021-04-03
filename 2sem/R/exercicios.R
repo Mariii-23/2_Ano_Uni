@@ -106,7 +106,7 @@ subset(yVec, yVec > 600)
 # OR
 (vector9_a <- yVec[yVec > 600])
 
-#### b
+####
 (subset((vector9_b <- (1:length(yVec)) * (yVec > 600)), vector9_b != 0))
 # OR
 which(yVec > 600)

@@ -185,6 +185,8 @@ ola<-append(ola, r1)
 *** 5 aula
 **** Funcao
 #+begin_SRC R
+num<-as.numeric(readline(prompt="Escreva um numero natural:"))
+
 f<-function(){
   x<-1
   x+5
@@ -200,4 +202,3 @@ y<-a+b
 c(x,y)
 }
 #+end_SRC
-
