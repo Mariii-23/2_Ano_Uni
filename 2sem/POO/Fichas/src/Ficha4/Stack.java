@@ -1,6 +1,6 @@
 package Ficha4;
 
-import org.jetbrains.annotations.NotNull;
+//import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -16,7 +16,7 @@ public class Stack {
     stack = new ArrayList<String>(size);
   }
 
-  public Stack(@NotNull Stack o) {
+  public Stack(/*@NotNull*/ Stack o) {
     this.stack = o.getStack();
   }
 

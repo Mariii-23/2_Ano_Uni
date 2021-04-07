@@ -1,4 +1,6 @@
-package Ficha4;
+package Fichas.src.Ficha4;
+
+//import Ficha4.EncEficiente;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,9 +8,20 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
 
 class EncEficienteTest {
+  @BeforeEach
+  public void setUp(){
+    System.out.println("Starting test: ");
+  }
+
+  @AfterEach
+  public void setOut(){
+    System.out.println("Ending test");
+  }
+
   Random random = new Random();
 
   final int valorString = 1000;

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Unix+bash+comandos">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/materia/Unix+bash+comandos.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

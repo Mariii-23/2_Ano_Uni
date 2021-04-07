@@ -1,3 +1,4 @@
+package Fichas.src;
 import Ficha3.Ficha3;
 import Ficha3.Jogo_Futebol;
 

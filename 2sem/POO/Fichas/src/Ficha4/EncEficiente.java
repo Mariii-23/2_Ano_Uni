@@ -1,4 +1,5 @@
-package Ficha4;
+package Fichas.src.Ficha4;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class EncEficiente {
   private int num_fiscal;
   private LocalDate data;
   //private List<LinhaEncomenda> lista;
-  private ArrayList<LinhaEncomenda> lista;
+  private List<LinhaEncomenda> lista;
 
   public EncEficiente(String nome, String morada, int num_fiscal, LocalDate data, LinhaEncomenda encomenda) {
     this.nome = nome;

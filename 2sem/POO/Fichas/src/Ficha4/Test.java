@@ -1,4 +1,4 @@
-package Ficha4;
+package Fichas.src.Ficha4;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
