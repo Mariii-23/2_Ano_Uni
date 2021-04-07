@@ -1,4 +1,4 @@
-package Ficha2;
+package Fichas.src.Ficha2;
 
 import java.io.File;
 import java.io.FileNotFoundException;

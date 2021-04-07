@@ -1,10 +1,11 @@
-package Ficha3;
+package Fichas.src.Ficha3;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import Ficha3.Triangulo;
 
 public class ColecaoTriangulos {
-  private ArrayList<Triangulo> triangulos;
+  private ArrayList<Ficha3.Triangulo> triangulos;
 
   public ColecaoTriangulos() {
     this.triangulos = new ArrayList<Triangulo>();

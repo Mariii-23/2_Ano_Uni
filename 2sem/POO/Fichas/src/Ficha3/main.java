@@ -1,4 +1,7 @@
-package Ficha3;
+package Fichas.src.Ficha3;
+
+import Ficha3.Circulo;
+import Ficha3.Jogo_Futebol;
 
 
 public class main {

@@ -1,5 +1,4 @@
-package Ficha1;
-
+package Fichas.src.Ficha1;
 import java.util.Scanner;
 
 /**

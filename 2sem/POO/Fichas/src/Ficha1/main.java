@@ -1,4 +1,5 @@
-package Ficha1;
+package Fichas.src.Ficha1;
+
 
 /**
  * Parte 2 -> exercício 7 com a main
@@ -9,7 +10,7 @@ public class main {
   public static void main(String[] args) {
     for (int i = 0; i < args.length; i++) {
       int n = Integer.parseInt(args[i]);
-      Ficha1.Parte2 ficha1 = new Ficha1.Parte2();
+      Parte2 ficha1 = new Parte2();
       ficha1.factorial(n);
     }
   }
