@@ -22,6 +22,7 @@ class EncEficienteTest {
     System.out.println("Ending test");
   }
 
+  // Dados
   Random random = new Random();
 
   final int valorString = 1000;
