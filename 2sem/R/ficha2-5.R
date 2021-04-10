@@ -185,12 +185,13 @@ f5(-20:20)
 
 ## 6
 stat<-function(x){
-  v<-c(mean(x),sd(x))
+  v<-c(mean(x,na.rm=T),sd(x))
   names(v)<-c("média","desvio-padrão")
   v
 }
 
 rivers
 (stat(rivers))
+(stat(rivers[1:20]))
 
-(rm(list = ls()))
+#(rm(list = ls()))
