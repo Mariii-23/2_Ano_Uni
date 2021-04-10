@@ -352,4 +352,8 @@ LETTERS:
 Filter(funcao q retorna T ou F, vetor)
 
 retorna todos os elementos q verificam a dada expressao
+
+str() -> devolve a estrutura do objeto
+
+search() -> package do sistema
 #+end_SRC
