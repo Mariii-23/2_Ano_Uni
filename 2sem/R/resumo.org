@@ -1,0 +1,117 @@
+#+TITLE: Resumo
+
+* Funcoes
+** Funcoes genéricas:
++ class() - (obter a classe do objeto)
++ typeof() – identificar o tipo de dados (como o objeto se encontra armazenado)
++ length() – devolver o comprimento do objeto.
+** Vetores
+*** Numeros
+#+begin_SRC R
+x<-c(1,2)
+l<-c(4,5)
+ola<-append(x,l)
+ola
+#+end_SRC
+
+#+RESULTS:
+| 1 |
+| 2 |
+| 4 |
+| 5 |
+
+*** Strings
+#+begin_SRC R
+a<-"Ola"
+b<-"Catarina"
+
+frase<-paste(a,b); frase
+# : Ola Catarina
+
+frase<-paste(a,b,sep="->"); frase
+# : Ola->Catarina
+#+end_SRC
+
+#+RESULTS:
+: Ola->Catarina
+
+** sequencia
+ #+begin_SRC R
+seq(from=12, to=34, by=3)
+ #+end_SRC
+
+ #+RESULTS:
+ | 12 |
+ | 15 |
+ | 18 |
+ | 21 |
+ | 24 |
+ | 27 |
+ | 30 |
+ | 33 |
+** rep()
+
+#+begin_SRC R
+
+(tmp <- c(4, 6, 3))
+
+#### a
+(tmpa <- rep(tmp, 10))
+
+#### b
+(tmpb <- append((rep(tmp, 10)), tmp[1]))
+
+#### c
+(tmpc <- rep(tmp, times = c(10, 20, 30)))
+
+#+end_SRC
+
+**  for()
+#+begin_SRC R
+for(i in sequencia){
+  expressao
+}
+#+end_SRC
+
+** while()
+#+begin_SRC R
+while( teste ){
+  expressao
+}
+#+end_SRC
+
+** stop() && wait()
+#+begin_SRC R
+ #input  do  u t i l i z a d o
+rnum <−as.numeric ( readline ( prompt=" Digite  na  consola um numero  natural :  " ) )
+####
+fatorial<−1
+# caso  nao  s e j a  i n s e r i d o  qualquer  valor
+if  ( is.na (num) ){
+  stop ( "deve  inserirum   valor  numerico" )
+} else  if (num < 0)  {
+  print ( "nao  existe  fatorial  para  numeros  negativos " )
+}  else  if  (num %% 1  !=0) {
+  stop ( "apenas  existe  fatorial  para  inteiros " )
+}  else  if (num == 0)  {
+  print ( "o  fatorial  de   0 e ’  1" ){
+  ....}
+}
+#+end_SRC
+
+    
+** funcao
+#+begin_SRC R
+f<-function(args){
+  bla bla bla
+}
+#+end_SRC
+
+** Filter
+#+begin_SRC R
+g<-function(i) all(i%%c(2,3,7)!=0)
+
+Filter(g,0:100)
+## Inteiros de 0 a 100 que não são divisíveis por 2, nem por 3 nem por 7.
+#+end_SRC
+

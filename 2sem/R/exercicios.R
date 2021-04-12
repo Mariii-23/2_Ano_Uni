@@ -78,7 +78,7 @@ ib <- 1:(length(xVec) - 1)
 (vector_b <- c(sin(yVec[ib]) / cos(xVec[ib + 1])))
 # OR
 n <- length(xVec)
-(vector_b1 <- sin(xVec[-n]) / cos(yVec[1]))
+(vector_b1 <- sin(yVec[-n]) / cos(xVec[-1]))
 ## OR
 Vec_b <- c()
 for (i in 1:(length(xVec) - 1)) {

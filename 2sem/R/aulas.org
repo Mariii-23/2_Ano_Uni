@@ -206,14 +206,16 @@ f<-function(){
 }
 
 body(f)
-formals(f) # NULL
+formals(f) # NULL Argumentos da funcao
 
 g<-function(a,b){
-x<-a^2
-print(x)
-y<-a+b
-c(x,y)
+  x<-a^2
+  print(x)
+  y<-a+b
+  c(x,y)
 }
+
+exist("a")-> ver se existe um objeto chamado a . 
 #+end_SRC
 *** 6 aula
 **** Vetores com nome
@@ -244,7 +246,6 @@ f(3,4)
 f(x = 3) # falta o a
 #+end_SRC
 
-#+RESULTS:
 **** Estrutura homogenia
 + R converte todos os dados para o mesmo tipo
 #+begin_SRC R
@@ -277,6 +278,7 @@ numeros <-scan()
 
 num<-as.numeric(readline())
 #+end_SRC
+
 **** Vetor com nomes
 #+begin_SRC R
 v<-1:26
@@ -356,4 +358,14 @@ retorna todos os elementos q verificam a dada expressao
 str() -> devolve a estrutura do objeto
 
 search() -> package do sistema
+
+a<-function(n){
+  n%%2==0
+}
+
+ola <- function(n) {
+  Filter(a,n)
+}
+
+ola(1:7)
 #+end_SRC

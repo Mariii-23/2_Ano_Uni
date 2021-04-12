@@ -20,7 +20,6 @@ f<-function(x,y){
 
 f(x,y)
 
-
 f2<-function(x,y){
   if(length(x)!=length(y))
     print("Warnig, os objetos não apresentam o mesmo comprimento")
@@ -174,8 +173,8 @@ entre_primos(2,1.5)
 
 ## 5
 f5<-function(x)
-  ifelse(x<0,-x,x)
-
+  ifelse(x<0,-x,x^2)
+  
 f5(0)
 f5(5)
 f5(-5)
