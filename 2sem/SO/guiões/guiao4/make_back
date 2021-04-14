@@ -7,9 +7,10 @@ OPT = -flto -Ofast -march=native -mtune=native
 CFLAGS = -std=c17 -Wall -Wextra -Wdouble-promotion -Werror=pedantic -Werror=vla -pedantic-errors -Wfatal-errors -g $(OPT)
 # CFLAGS = -g
 CC = gcc
-OBJS = guiao.o 
+OBJS = guiao4.o 
 NAME = guiao
-GUIAO = guiao.c 
+GUIAO = guiao4.c 
+NAME1 = ex3
 
 all: $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(GUIAO)
