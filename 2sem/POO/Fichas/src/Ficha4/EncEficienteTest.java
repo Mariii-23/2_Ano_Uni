@@ -1,4 +1,4 @@
-package Fichas.src.Ficha4;
+  package Fichas.src.Ficha4;
 
 //import Ficha4.EncEficiente;
 
