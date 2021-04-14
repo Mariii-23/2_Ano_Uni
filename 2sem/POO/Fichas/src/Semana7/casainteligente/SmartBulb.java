@@ -1,9 +1,9 @@
 package Fichas.src.Semana7.casainteligente;
 
 public class SmartBulb extends SmartDevice{
-  public static final int WARM = 0;
-  public static final int NEUTRAL= 10;
-  public static final int COLD = -10;
+  public static final int WARM = 2;
+  public static final int NEUTRAL= 1;
+  public static final int COLD = 0;
 
   private int tone;
 
@@ -26,6 +26,9 @@ public class SmartBulb extends SmartDevice{
   }
 
   public void setTone(int tone) {
-    this.tone = tone;
+    if(tone>0)
+      this.tone = 2;
+    else if ( tone<0 )
+      this.tone = 0;
   }
 }
