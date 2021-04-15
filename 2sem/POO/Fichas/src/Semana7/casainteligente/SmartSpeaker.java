@@ -1,5 +1,7 @@
 package Fichas.src.Semana7.casainteligente;
 
+import java.util.Objects;
+
 public class SmartSpeaker extends SmartDevice {
   public static final int MAX =100;
   public static final int MIN =0;
@@ -42,9 +44,27 @@ public class SmartSpeaker extends SmartDevice {
   }
 
   public void volumeUp(){
-    this.volume = this.volume++ % (MAX+1);
+    if( this.volume++>= MAX) this.volume= MAX ;
   }
   public void volumeDown(){
-    this.volume = this.volume-- % (MAX+1);
+    if( this.volume--<= MIN) this.volume= MIN ;
+  }
+
+  public SmartSpeaker clone(){
+    return new SmartSpeaker(this.getID(),this.channel,this.volume);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    SmartSpeaker that = (SmartSpeaker) o;
+    return volume == that.volume && Objects.equals(channel, that.channel);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), channel, volume);
   }
 }

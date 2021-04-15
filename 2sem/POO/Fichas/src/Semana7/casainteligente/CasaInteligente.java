@@ -2,10 +2,7 @@ package Fichas.src.Semana7.casainteligente;
 
 import Fichas.src.Ficha4.EncEficiente;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CasaInteligente {
@@ -18,7 +15,6 @@ public class CasaInteligente {
     this.devices = devices;
     this.perRoom = perRoom;
   }
-
 
   public CasaInteligente(String morada) {
     this.morada = morada;
@@ -45,7 +41,7 @@ public class CasaInteligente {
   }
 
   public void addDevice(SmartDevice device){
-    this.devices.put(device.getID(),device);
+    this.devices.put(device.getID(),device.clone());
   }
 
   public SmartDevice getDevice(String id){
@@ -68,12 +64,28 @@ public class CasaInteligente {
   }
 
   public void addToRoom(String room,String id){
-    //this.perRoom.put(room, perRoom.get(room).add(id) );
+    List<String> ola = this.perRoom.get(room);
+    if(ola==null) ola = new ArrayList<>();
+    ola.add(id);
+    this.perRoom.put(room, ola );
   }
 
   public boolean roomHasDevice(String room,String device){
-    List<String> list = this.perRoom.get(device);
+    List<String> list = this.perRoom.get(room);
 
     return hasRoom(room) && list.contains(device) ;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    CasaInteligente that = (CasaInteligente) o;
+    return Objects.equals(morada, that.morada) && Objects.equals(devices, that.devices) && Objects.equals(perRoom, that.perRoom);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(morada, devices, perRoom);
   }
 }

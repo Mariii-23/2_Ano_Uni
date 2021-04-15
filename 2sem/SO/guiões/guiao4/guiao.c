@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-void exer1() {
+void ex1() {
   int res = 0, i = 0;
   char buffer;
   char line[1024];
@@ -104,7 +104,7 @@ int ex3() {
 }
 
 int main(int argc, char *argv[]) {
-  exer1();
+  ex1();
   ex2();
   ex3();
   return 0;
