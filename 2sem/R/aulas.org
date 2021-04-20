@@ -369,3 +369,377 @@ ola <- function(n) {
 
 ola(1:7)
 #+end_SRC
+*** 7 aula (depois do  teste)
+**** Matrizes
+***** Criacao
+#+begin_SRC R
+m<-matrix()
+m
+# NA
+
+class(m) # diferente de null
+
+dim(m) # 1 1
+
+
+m[2,3]<-4
+# da erro, devido ao facto de estar
+# fora dos limites da matriz
+#+end_SRC
+
++ Criacao de matrix por defeito
+  Por defeito faz por colunas
+#+begin_SRC R
+(m<-matrix(1:5))
+#+end_SRC
+
+#+RESULTS:
+| 1 |
+| 2 |
+| 3 |
+| 4 |
+| 5 |
+
++ Organiza a matrix por n colunas do mesmo tamanho
+#+begin_SRC R
+(m<-matrix(1:5,nc = 2))
+#+end_SRC
+
+#+RESULTS:
+| 1 | 4 |
+| 2 | 5 |
+| 3 | 1 |
+
++ Organiza a matrix por n linhas do mesmo tamanho
+#+begin_SRC R
+(m<-matrix(1:10,nr = 2, byrow=TRUE))
+#+end_SRC
+
+#+RESULTS:
+| 1 | 2 | 3 | 4 |  5 |
+| 6 | 7 | 8 | 9 | 10 |
+
++ Criacao de matrix sem o matrix()
+#+begin_SRC R
+v<-c(10:13)
+w<-(seq(0,1,length.out=4))
+x<-(seq(-7,4,length.out=4))
+
+(mat<-rbind(v,w,x))
+rownames(mat)
+#+end_SRC
+
+#+RESULTS:
+| 10 |                11 |                12 | 13 |
+|  0 | 0.333333333333333 | 0.666666666666667 |  1 |
+| -7 | -3.33333333333333 | 0.333333333333333 |  4 |
+
+| v |
+| w |
+| x |
+
+***** Aceder
++ 1 elem , 1 coluna ou 1 linha
+    #+begin_SRC R
+    (Mat<-matrix(1:20,nr = 4, byrow=TRUE))
+    Mat[2,3]
+    Mat[,3]
+    Mat[1,]
+
+    diag(Mat)
+    upper.tri(Mat,diag=TRUE)
+    #+end_SRC
+
+    #+RESULTS:
+    |  1 |  2 |  3 |  4 |  5 |
+    |  6 |  7 |  8 |  9 | 10 |
+    | 11 | 12 | 13 | 14 | 15 |
+    | 16 | 17 | 18 | 19 | 20 |
+
+    : 8
+
+    |  3 |
+    |  8 |
+    | 13 |
+    | 18 |
+
+    |  1 | 2 | 3 | 4 | 5 |
+
+    |  1 |
+    |  7 |
+    | 13 |
+    | 19 |
+
+    | TRUE  | TRUE  | TRUE  | TRUE | TRUE |
+    | FALSE | TRUE  | TRUE  | TRUE | TRUE |
+    | FALSE | FALSE | TRUE  | TRUE | TRUE |
+    | FALSE | FALSE | FALSE | TRUE | TRUE |
+
++ Verificacao
+ #+begin_SRC R
+ (Mat<-matrix(1:20,nr = 4, byrow=TRUE))
+ Mat<-cbind(Mat,c(NA,-9,NA,NA,NA))
+ which(is.na(Mat))
+ which(is.na(Mat),arr.ind=TRUE)
+ Mat[which(is.na(Mat),arr.ind=TRUE)]<-999
+ Mat
+ #+end_SRC 
+
+ #+RESULTS:
+ |  1 |  2 |  3 |  4 |  5 | NA |
+ |  6 |  7 |  8 |  9 | 10 | -9 |
+ | 11 | 12 | 13 | 14 | 15 | NA |
+ | 16 | 17 | 18 | 19 | 20 | NA |
+
+ | 21 |
+ | 23 |
+ | 24 |
+
+ | 1 | 6 |
+ | 3 | 6 |
+ | 4 | 6 |
+
+ |  1 |  2 |  3 |  4 |  5 | 999 |
+ |  6 |  7 |  8 |  9 | 10 |  -9 |
+ | 11 | 12 | 13 | 14 | 15 | 999 |
+ | 16 | 17 | 18 | 19 | 20 | 999 |
+
++ Soma de matrizes
+ #+begin_SRC R
+ (Mat<-matrix(1:20,nr = 4, byrow=TRUE))
+ (M<-matrix(1:10,nc = 2 , byrow=TRUE))
+
+ Mat+M # como nao tem a mesma dimensao
+       # irá dar erro
+ Mat + Mat
+ #+end_SRC
+
+ #+RESULTS:
+
+ |  1 |  2 |  3 |  4 |  5 |
+ |  6 |  7 |  8 |  9 | 10 |
+ | 11 | 12 | 13 | 14 | 15 |
+ | 16 | 17 | 18 | 19 | 20 |
+
+ | 1 |  2 |
+ | 3 |  4 |
+ | 5 |  6 |
+ | 7 |  8 |
+ | 9 | 10 |
+
+ : error
+
+ |  2 |  4 |  6 |  8 | 10 |
+ | 12 | 14 | 16 | 18 | 20 |
+ | 22 | 24 | 26 | 28 | 30 |
+ | 32 | 34 | 36 | 38 | 40 |
+
++ Multiplicacao
+ #+begin_SRC R
+ (Mat<-matrix(1:4,nc = 2, byrow=TRUE))
+ (M<-matrix(8:11,nc = 2, byrow=TRUE))
+
+ # Elemento a elemento
+ Mat*M
+
+ # Multiplicacao da algebra linear
+ Mat%*%M
+
+ solve(Mat)
+ #+end_SRC
+
+ #+RESULTS:
+
+ | 1 | 2 |
+ | 3 | 4 |
+
+ |  8 |  9 |
+ | 10 | 11 |
+
+ |  8 | 18 |
+ | 30 | 44 |
+
+ | 28 | 31 |
+ | 64 | 71 |
+
+ |  -2 |    1 |
+ | 1.5 | -0.5 |
+
++ Funcao outer e somatorios
+ #+begin_SRC R
+ (Mat<-matrix(1:25,nc = 5, byrow=TRUE))
+
+ # sum_{i=1 to 5} sum_{j=1 to 5} i+j
+ m<-outer(1:5,1:5,"+")
+
+ m<-outer(1:5,1:5,function(i,j){(2*i+j)/(i*j)})
+
+ m<-outer(1:5,1:4,function(i,j){(j>i)/(i+j)})
+ #+end_SRC
+
+ #+RESULTS:
+
+ #Mat
+ |  1 |  2 |  3 |  4 |  5 |
+ |  6 |  7 |  8 |  9 | 10 |
+ | 11 | 12 | 13 | 14 | 15 |
+ | 16 | 17 | 18 | 19 | 20 |
+ | 21 | 22 | 23 | 24 | 25 |
+
+ #m<-outer(1:5,1:5,"+")
+ | 2 | 3 | 4 | 5 |  6 |
+ | 3 | 4 | 5 | 6 |  7 |
+ | 4 | 5 | 6 | 7 |  8 |
+ | 5 | 6 | 7 | 8 |  9 |
+ | 6 | 7 | 8 | 9 | 10 |
+
+ #m<-outer(1:5,1:5,function(i,j){(2*i+j)/(i*j)})
+ |                3 |                2 |  1.66666666666667 |               1.5 |               1.4 |
+ |              2.5 |              1.5 |  1.16666666666667 |                 1 |               0.9 |
+ | 2.33333333333333 | 1.33333333333333 |                 1 | 0.833333333333333 | 0.733333333333333 |
+ |             2.25 |             1.25 | 0.916666666666667 |              0.75 |              0.65 |
+ |              2.2 |              1.2 | 0.866666666666667 |               0.7 |               0.6 |
+
+ #m<-outer(1:5,1:4,function(i,j){(j>i)/(i+j)})
+ | 0 | 0.333333333333333 | 0.25 |               0.2 |
+ | 0 |                 0 |  0.2 | 0.166666666666667 |
+ | 0 |                 0 |    0 | 0.142857142857143 |
+ | 0 |                 0 |    0 |                 0 |
+ | 0 |                 0 |    0 |                 0 |
+
++ Mais funcoes especias de matrizes
+ #+begin_SRC R
+ set.seed(123)
+
+ m<-matrix( sample(c(1:89,rep(NA,11))),nc=10)
+
+ # somar colunas
+ colSum(m,na.rm=TRUE)
+ # somar linhas
+ rowSum(m,na.rm=TRUE)
+
+ # media colunas
+ colMeans(m,na.rm=TRUE)
+ # media linhas
+ rowMeans(m,na.rm=TRUE)
+
+ mean(m,na.rm=TRUE)
+ sd(m,na.rm=TRUE)
+
+ # desvio padra dos elementos de cada coluna da matrix
+ # com for:
+
+ dp<-c()
+
+ for(j in 1:10){
+   dp[j]<-sd(matriz[,j])
+ }
+
+ dp
+ #+end_SRC 
+
+ #+RESULTS:
+
++ funcao apply()
+ #+begin_SRC R
+ set.seed(123)
+
+ m<-matrix( sample(c(1:89,rep(NA,11))),nc=10)
+
+ apply(m,2,sd,na.rm = T)
+ #+end_SRC
+
+ #+RESULTS:
+
+ | 31 |    | 78 | 60 |  8 | 73 |    | 19 | 59 | 56 |
+ | 79 | 69 |    | 53 | 12 | 47 | 39 | 54 | 48 | 11 |
+ | 51 | 57 | 76 | 75 | 13 | 85 | 49 | 20 | 24 | 55 |
+ | 14 |  9 | 15 | 89 | 18 |    | 17 | 80 | 45 | 37 |
+ | 67 | 72 | 32 | 71 | 33 | 16 | 63 | 62 | 81 |  2 |
+ | 42 | 26 | 84 | 38 | 66 | 30 |  4 |    | 68 | 28 |
+ | 50 |  7 | 82 |    | 64 |  6 | 58 | 86 | 88 | 74 |
+ | 43 |    | 41 | 34 | 65 |    | 61 |  3 |    | 35 |
+ |    | 87 | 23 | 29 | 21 | 70 | 40 | 83 | 44 | 52 |
+ | 25 | 36 | 27 |  5 | 77 | 22 |    | 46 | 10 |  1 |
+
+ | 20.2175666191557 |
+ | 30.2226854247884 |
+ | 28.5501508071518 |
+ | 26.3633794832487 |
+ | 27.1295247122229 |
+ | 29.5535228743667 |
+ | 21.3336588516832 |
+ | 30.6797979132849 |
+ | 25.2954760997122 |
+ | 24.7765570202516 |
+
+***** Data frame
+ Estruturas de dados retangulares
+
+ Num data frame as colunas têm que ter o mesmo número mas as colunas podem ser de qualquer tipo (ao contrario das matizes).
+
+ #+begin_SRC R
+ head(iris)
+ #+end_SRC
+
+ #+RESULTS:
+
+ | Sepa.Length | Spal.Width | Petal.Length |
+ |         5.1 |        3.5 |          1.4 |
+ |         4.9 |          3 |          1.4 |
+ |         4.7 |        3.2 |          1.3 |
+ |         4.6 |        3.1 |          1.5 |
+ |           5 |        3.6 |          1.4 |
+ |         5.4 |        3.9 |          1.7 |
+
+ | Pedal.Width | Species |
+ |         0.2 | setosa  |
+ |         0.2 | setosa  |
+ |         0.2 | setosa  |
+ |         0.2 | setosa  |
+ |         0.2 | setosa  |
+ |         0.4 | setosa  |
+
++ Inicializacao
+ #+begin_SRC R
+ # vazia
+ df<-data.frame()
+
+ df<-data.frame(1:26,letters)
+
+ colnames(df)
+ #+end_SRC
+
+ #+RESULTS:
+
+ #df<-data.frame(1:26,letters)
+ |  1 | a |
+ |  2 | b |
+ |  3 | c |
+ |  4 | d |
+ |  5 | e |
+ |  6 | f |
+ |  7 | g |
+ |  8 | h |
+ |  9 | i |
+ | 10 | j |
+ | 11 | k |
+ | 12 | l |
+ | 13 | m |
+ | 14 | n |
+ | 15 | o |
+ | 16 | p |
+ | 17 | q |
+ | 18 | r |
+ | 19 | s |
+ | 20 | t |
+ | 21 | u |
+ | 22 | v |
+ | 23 | w |
+ | 24 | x |
+ | 25 | y |
+ | 26 | z |
+
+ #colnames(df)
+ | X1.26   |
+ | letters |
