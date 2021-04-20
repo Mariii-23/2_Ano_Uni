@@ -104,6 +104,7 @@ seq(0,1,length.out=10)
 
 #+RESULTS:
 *** 2 aula
++ Vetores
 #+begin_SRC R
 
 # vetores com inteiros
@@ -120,6 +121,7 @@ is.na(idades)
 | 5 |
 | 7 |
 *** 3 aula
++ & e &&
 #+begin_SRC R
 # diferenca entre & e &&
 ## & faz com os vectores e && faz apenas para o primeiro elemento
