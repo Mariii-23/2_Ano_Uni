@@ -103,9 +103,28 @@ int ex3() {
   return 0;
 }
 
-int main(int argc, char *argv[]) {
+int ex4() {
+  int res = 0;
+  int input_fd = open("/etc", O_RDONLY);
+  int output_fd = open("saida4.txt", O_CREAT | O_TRUNC | O_WRONLY, 0666);
+  int output_error = open("erros4.txt", O_CREAT | O_TRUNC | O_WRONLY, 0666);
+
+  res = dup2(input_fd, 0);
+  res = dup2(output_fd, 1);
+  res = dup2(output_error, 2);
+
+  close(input_fd);
+  close(output_error);
+  close(output_fd);
+
+  res = execlp("wc", "/bin/wc", NULL);
+  return 0;
+}
+
+int main(void) {
   ex1();
   ex2();
   ex3();
+  ex4();
   return 0;
 }

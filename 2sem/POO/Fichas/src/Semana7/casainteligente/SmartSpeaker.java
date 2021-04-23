@@ -3,7 +3,7 @@ package Fichas.src.Semana7.casainteligente;
 import java.util.Objects;
 
 public class SmartSpeaker extends SmartDevice {
-  public static final int MAX =100;
+  public static final int MAX =20;
   public static final int MIN =0;
 
   private String channel;
@@ -12,6 +12,9 @@ public class SmartSpeaker extends SmartDevice {
   public SmartSpeaker(String ID, String channel, int volume) {
     super(ID,false);
     this.channel = channel;
+    if(volume>MAX) volume = MAX;
+    else if(volume <MIN) volume = MIN;
+    this.volume = volume;
     this.volume = volume;
   }
 
@@ -40,6 +43,8 @@ public class SmartSpeaker extends SmartDevice {
   }
 
   public void setVolume(int volume) {
+    if(volume>MAX) volume = MAX;
+    else if(volume <MIN) volume = MIN;
     this.volume = volume;
   }
 

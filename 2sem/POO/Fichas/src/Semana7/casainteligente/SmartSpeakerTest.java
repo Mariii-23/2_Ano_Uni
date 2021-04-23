@@ -76,12 +76,12 @@ public class SmartSpeakerTest {
 
     @Test
     public void testSetVolume() {
-        SmartSpeaker smartSpe1 = new SmartSpeaker("s1", "RUM", 5);
+        SmartSpeaker smartSpe1 = new SmartSpeaker("s1", "RUM", 3);
         smartSpe1.volumeUp();
         smartSpe1.volumeUp();
         assertEquals(5, smartSpe1.getVolume());
         for (int i=0; i<25; i++) smartSpe1.volumeUp();
-        assertEquals(30, smartSpe1.getVolume());
+        assertEquals(20, smartSpe1.getVolume());
         for (int i=0; i<30; i++) smartSpe1.volumeDown();
         assertEquals(0, smartSpe1.getVolume());
     }
