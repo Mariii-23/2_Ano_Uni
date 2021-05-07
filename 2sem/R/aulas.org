@@ -866,3 +866,14 @@ apply(iris[ ,-5],2,which.max)
 |  16 |
 | 119 |
 | 101 |
+*** 9 aula
+Summary -> sumário da "biblioteca" a ser explorada
+**** Family apply
+evita ciclos for
++ exercicio da pagina 34 c):
+#+begin_SRC R
+vers<-iris[iris$Species == "versicolor",-5]
+
+#somar linhas
+v<-apply(vers,1,sum)
+#+end_SRC

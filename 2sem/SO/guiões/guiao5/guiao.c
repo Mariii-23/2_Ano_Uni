@@ -43,7 +43,7 @@ int ex4() {
   int status[2];
 
   if (pipe(p) != 0) {
-    /* 77algo */
+    /* algo */
   }
 
   switch (fork()) {
@@ -82,8 +82,9 @@ int ex4() {
   return 0;
 }
 
+/* char **cmd = {["ls", "-l"], [ "wc", "-l" ]}; */
+
 int main(void) {
-  printf("Ola\n");
   printf("\nExercicio 4\n");
   ex4();
   return 0;

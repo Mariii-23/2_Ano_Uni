@@ -8,14 +8,20 @@ public class VeiculoOcasiao extends Veiculo{
     this.promocao=false;
   }
 
-
   public VeiculoOcasiao(boolean promocao){
     super();
     this.promocao=promocao;
   }
 
+  public boolean isPromocao() {
+    return promocao;
+  }
 
-   @Override
+  public void setPromocao(boolean promocao) {
+    this.promocao = promocao;
+  }
+
+  @Override
    public double custoRealKM(){
      double custo =  super.custoRealKM();
      if(this.promocao)

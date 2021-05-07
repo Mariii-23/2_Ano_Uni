@@ -1,9 +1,10 @@
 package Fichas.src.Ficha6;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DriveIt {
+public class DriveIt implements Serializable {
   private Map<String,Veiculo> list;
 
   public DriveIt() {
@@ -33,12 +34,6 @@ public class DriveIt {
   }
 
   public int quantos(String marca){
-    //int quantos = 0;
-    //for(Map.Entry<String,Veiculo> e : list.entrySet() ){
-    //  if(e.getValue().getMarca().equals(marca))
-    //    quantos++;
-    //}
-    //return quantos;
     return (int) this.list.values().stream().filter(elem->elem.getMarca().equals(marca)).count();
   }
 
@@ -56,13 +51,27 @@ public class DriveIt {
 
   public void adiciona(Set<Veiculo> vs){
     for( Veiculo elem : vs){
-      this.list.put(elem.getMatricula(),elem.clone()); // faltava-te aqui um clone
+      this.list.put(elem.getMatricula(),elem.clone());
     }
   }
 
-  public void registarAluguer(String codVeiculo, int numKms){
-    if(this.list.containsKey(codVeiculo))
-    this.list.get(codVeiculo).addViagem(numKms);
+  public List<Veiculo> veiculosOrdenadosCusto(){
+    List<Veiculo> newlist = getVeiculos();
+    Collections.sort(newlist, (e1,e2)->((int)(e2.custoRealKM()-e1.custoRealKM())) );
+    return newlist;
+  }
+
+  public Veiculo veiculoMaisBarato(){
+    List<Veiculo> newlist = getVeiculos();
+    if(newlist.isEmpty())
+      return null;
+    return newlist.get(0);
+  }
+
+  public Veiculo veiculoMenosUtilizado(){
+    List<Veiculo> newlist = getVeiculos();
+    Collections.sort(newlist, (e1,e2)-> (e2.getKms()-e1.getKms()) );
+    return newlist.isEmpty() ? null : newlist.get(0);
   }
 
   public void classificarVeiculo(String cod, int classificacao){
@@ -75,6 +84,14 @@ public class DriveIt {
     if(this.list.containsKey(cod))
       custo = (int) this.list.get(cod).custoRealKM();
     return custo;
+  }
+
+  public void registarAluguer(String codVeiculo, int numKms){
+   this.list.get(codVeiculo).addViagem(numKms);
+  }
+
+  public void alteraPromocao(boolean estado){
+    this.list.values().stream().filter(e -> e.getClass() == VeiculoOcasiao.class).forEach(e -> ((VeiculoOcasiao) e).setPromocao(estado));
   }
 
   @Override
@@ -93,5 +110,12 @@ public class DriveIt {
   @Override
   public Object clone( ) throws CloneNotSupportedException {
     return new DriveIt(this);
+  }
+
+  @Override
+  public String toString() {
+    return "DriveIt{" +
+        "list=" + list +
+        '}';
   }
 }

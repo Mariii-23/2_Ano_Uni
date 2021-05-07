@@ -10,6 +10,7 @@ package Fichas.src.Ficha6;
 /** conhecimentos de POO.                                                        */
 /*********************************************************************************/ 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * @version 20210420
  */
 
-public class Veiculo implements Comparable<Veiculo> {
+public class Veiculo implements Comparable<Veiculo> , Serializable {
     private String marca;
     private String modelo;
     private String matricula;
@@ -74,7 +75,6 @@ public class Veiculo implements Comparable<Veiculo> {
         this.classificacao = v.getClassificacao();
         this.kms = v.getKms();
         this.kmsUltimo = v.getKmsUltimo();
-
     }
     
     
@@ -103,7 +103,6 @@ public class Veiculo implements Comparable<Veiculo> {
         return precokm;
     }
 
-    
     /**
      * Se a implementação fosse:
      *   return this.classificação;
@@ -140,7 +139,6 @@ public class Veiculo implements Comparable<Veiculo> {
         this.kms += nkms;
         this.kmsUltimo = nkms;
     }
-
     
     /**
      * Esta implementação poderá ser alterada.
@@ -165,8 +163,6 @@ public class Veiculo implements Comparable<Veiculo> {
     public Veiculo clone(){
         return new Veiculo(this);
     }
-
-
 
     @Override
     public boolean equals(Object o){
@@ -193,9 +189,19 @@ public class Veiculo implements Comparable<Veiculo> {
       else
         return (this.marca.compareTo(v.getMarca()));        
     }
-    
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Veiculo{" +
+            "marca='" + marca + '\'' +
+            ", modelo='" + modelo + '\'' +
+            ", matricula='" + matricula + '\'' +
+            ", ano=" + ano +
+            ", velociademedia=" + velociademedia +
+            ", precokm=" + precokm +
+            ", classificacao=" + classificacao +
+            ", kms=" + kms +
+            ", kmsUltimo=" + kmsUltimo +
+            '}';
+    }
 }
