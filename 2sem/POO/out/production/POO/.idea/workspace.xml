@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd72a036-f1f6-4975-8ec2-ad22e7ebba69" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../1sem/Alg/Algoritmos_C/heaps/heaps.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../1sem/Alg/Algoritmos_C/heaps/heaps.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fichas/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fichas/src/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/POO/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/POO/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SO/guiões/guiao4/guiao" beforeDir="false" afterPath="$PROJECT_DIR$/../SO/guiões/guiao4/guiao" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SO/guiões/guiao4/guiao.c" beforeDir="false" afterPath="$PROJECT_DIR$/../SO/guiões/guiao4/guiao.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SO/guiões/guiao4/guiao.o" beforeDir="false" afterPath="$PROJECT_DIR$/../SO/guiões/guiao4/guiao.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CP/compose.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../CP/compose.hs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,16 +42,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Ficha5Ex5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Groovy" />
   </component>
-  <component name="RunManager" selected="JUnit.CasaInteligenteTest">
-    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Fichas.src.main" />
+  <component name="RunManager" selected="Application.Function_example">
+    <configuration name="Function_example" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Fichas.src.Notas.Function_example" />
       <module name="POO" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Fichas.src.*" />
+          <option name="PATTERN" value="Fichas.src.Notas.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -90,7 +85,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CasaInteligenteTest.testAddToRoom" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SmartBulbTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="POO" />
       <extension name="coverage">
         <pattern>
@@ -99,14 +94,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Fichas.src.Semana7.casainteligente" />
-      <option name="MAIN_CLASS_NAME" value="Fichas.src.Semana7.casainteligente.CasaInteligenteTest" />
-      <option name="METHOD_NAME" value="testAddToRoom" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="Fichas.src.Semana7.casainteligente.SmartBulbTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CasaInteligenteTest.testGetDevice" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SmartSpeakerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="POO" />
       <extension name="coverage">
         <pattern>
@@ -115,14 +109,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Fichas.src.Semana7.casainteligente" />
-      <option name="MAIN_CLASS_NAME" value="Fichas.src.Semana7.casainteligente.CasaInteligenteTest" />
-      <option name="METHOD_NAME" value="testGetDevice" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="Fichas.src.Semana7.casainteligente.SmartSpeakerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CasaInteligenteTest.testSetOn" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SmartSpeakerTest.testGetVolume" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="POO" />
       <extension name="coverage">
         <pattern>
@@ -131,8 +124,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Fichas.src.Semana7.casainteligente" />
-      <option name="MAIN_CLASS_NAME" value="Fichas.src.Semana7.casainteligente.CasaInteligenteTest" />
-      <option name="METHOD_NAME" value="testSetOn" />
+      <option name="MAIN_CLASS_NAME" value="Fichas.src.Semana7.casainteligente.SmartSpeakerTest" />
+      <option name="METHOD_NAME" value="testGetVolume" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -140,11 +133,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Function_example" />
         <item itemvalue="JUnit.CasaInteligenteTest" />
-        <item itemvalue="Application.main" />
-        <item itemvalue="JUnit.CasaInteligenteTest.testAddToRoom" />
-        <item itemvalue="JUnit.CasaInteligenteTest.testGetDevice" />
-        <item itemvalue="JUnit.CasaInteligenteTest.testSetOn" />
+        <item itemvalue="JUnit.SmartBulbTest" />
+        <item itemvalue="JUnit.SmartSpeakerTest" />
+        <item itemvalue="JUnit.SmartSpeakerTest.testGetVolume" />
       </list>
     </recent_temporary>
   </component>
@@ -172,6 +165,13 @@
       <workItem from="1618998623079" duration="535000" />
       <workItem from="1619000219931" duration="729000" />
       <workItem from="1619011645952" duration="41000" />
+      <workItem from="1619011867152" duration="674000" />
+      <workItem from="1619018085984" duration="60000" />
+      <workItem from="1619027167482" duration="2043000" />
+      <workItem from="1619041921424" duration="22000" />
+      <workItem from="1620198762319" duration="6139000" />
+      <workItem from="1620380147042" duration="700000" />
+      <workItem from="1620645752463" duration="444000" />
     </task>
     <servers />
   </component>
