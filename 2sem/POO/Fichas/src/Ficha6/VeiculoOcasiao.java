@@ -1,16 +1,26 @@
 package Fichas.src.Ficha6;
 
+import java.util.ArrayList;
+
 public class VeiculoOcasiao extends Veiculo{
   private boolean promocao;
 
-  public VeiculoOcasiao(){
-    super();
+  public VeiculoOcasiao(String marca, String modelo, String matricula, int ano, double velociademedia,
+                        double precokm, ArrayList<Integer> classificacao, int kms, int kmsUltimo){
+    super(marca, modelo, matricula, ano, velociademedia, precokm, classificacao, kms, kmsUltimo);
     this.promocao=false;
   }
 
-  public VeiculoOcasiao(boolean promocao){
-    super();
+  public VeiculoOcasiao(String marca, String modelo, String matricula, int ano, double velociademedia,
+                        double precokm, ArrayList<Integer> classificacao, int kms, int kmsUltimo,boolean promocao){
+    super(marca, modelo, matricula, ano, velociademedia, precokm, classificacao, kms, kmsUltimo);
     this.promocao=promocao;
+  }
+
+  public VeiculoOcasiao(VeiculoOcasiao that){
+    super(that.getMarca(), that.getModelo(), that.getMatricula(), that.getAno(), that.getVelociademedia(),
+        that.getPrecokm(), that.getClassificacao(), that.getKms(), that.getKmsUltimo());
+    this.promocao= that.promocao;
   }
 
   public boolean isPromocao() {
@@ -29,5 +39,14 @@ public class VeiculoOcasiao extends Veiculo{
      return custo;
   }
 
-  // fazer clone
+  public VeiculoOcasiao clone(){
+    return new VeiculoOcasiao(this);
+  }
+
+  @Override
+  public String toString() {
+    return "VeiculoOcasiao{" +
+        "promocao=" + promocao +
+        '}';
+  }
 }

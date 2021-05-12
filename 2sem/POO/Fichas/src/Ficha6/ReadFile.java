@@ -1,16 +1,13 @@
 package Fichas.src.Ficha6;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.List;
 
 // fase 4
 public class ReadFile {
 
   public static void toCsv(String filename, List<Veiculo> viaturas) throws IOException {
-    PrintWriter fich = new PrintWriter(filename);
+    PrintWriter fich = new PrintWriter(new File(filename));
     for (Veiculo v : viaturas) {
       fich.println(v.toString());
     }

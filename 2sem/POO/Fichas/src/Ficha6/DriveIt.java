@@ -10,6 +10,7 @@ public class DriveIt implements Serializable {
   public DriveIt() {
     this.list = new HashMap<>();
   }
+
   public DriveIt(Map<String, Veiculo> list) {
     this.list = new HashMap<>();
     for(Map.Entry<String,Veiculo> e : list.entrySet() ){
@@ -33,7 +34,7 @@ public class DriveIt implements Serializable {
     return list.size();
   }
 
-  public int quantos(String marca){
+  public int quantosT(String marca){
     return (int) this.list.values().stream().filter(elem->elem.getMarca().equals(marca)).count();
   }
 
