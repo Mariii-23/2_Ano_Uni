@@ -1,0 +1,93 @@
+//Classe Elemento
+public class Elemento {
+    private Candidato candidato;
+    private Elemento next;
+    public Elemento(Candidato a)
+    {
+        this.candidato = a.clone();
+        this.next = null;
+    }
+    public Elemento(Elemento e)
+    {
+        if (e!=null)
+        {
+            this.candidato = e.getCandidato().clone();
+            this.next = e.getNext();
+        }
+    }
+
+    public Elemento getNext()
+    {
+        return this.next;
+    }
+
+    public void setNext(Elemento x)
+    {
+        this.next = x;
+    }
+
+    public Candidato getCandidato()
+    {
+        if (this.candidato!=null)
+            return this.candidato.clone();
+        else return null;
+    }
+}
+
+//Classe LLCandidatos
+public class LLCandidatos {
+    private int tamanho;
+    private Elemento lista;
+    //a
+    public LLCandidatos()
+    {
+        tamanho=0;
+        lista=null;
+    }
+    //b
+    public int size()
+    {
+        return this.tamanho;
+    }
+    //c
+    public void add(Candidato c)
+    {
+        Elemento finder = null;
+        if (this.lista == null)
+            this.lista = new Elemento(c);
+        else
+        {
+            finder = new Elemento(c);
+            finder.setNext(this.lista);
+            this.lista = finder;
+        }
+        this.tamanho++;
+    }
+    //d
+    public Candidato get (int i) throws CandidatoException
+    {
+        Elemento finder = new Elemento(this.lista);
+        if (i > this.size()) throw new CandidatoException("O Cliente não existe!");
+        for (int count = 0;count < i;count++)
+            finder = finder.getNext();
+        return finder.getCandidato();
+    }
+    //e
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o==null || this.getClass()!=o.getClass()) return false;
+        LLCandidatos lc = (LLCandidatos) o;
+        if (lc.size()!=this.size()) return false;
+        for (int count = 0;count < lc.size();count++)
+            try {
+                if (!lc.get(count).equals(this.get(count)))
+                    return false;
+            }
+            catch (CandidatoException e)
+            {
+                return false;
+            }
+        return true;
+    }
+}
