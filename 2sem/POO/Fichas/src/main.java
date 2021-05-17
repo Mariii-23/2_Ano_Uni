@@ -5,7 +5,11 @@ import Fichas.src.Semana7.casainteligente.SmartBulb;
 import Fichas.src.Semana7.casainteligente.SmartDevice;
 import Fichas.src.Semana7.casainteligente.SmartSpeaker;
 
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class main {
   public static void main(String[] args) {
@@ -13,6 +17,13 @@ public class main {
     SmartDevice adeus = new SmartSpeaker();
     System.out.println(ola.getClass().getSimpleName());
     System.out.println(adeus.getClass().getSimpleName());
+
+    List<Point2D> grh = new ArrayList<>();
+    grh.add(new Point(1,1));
+    grh.add(new Point(2,2));
+    grh.add(new Point(3,3));
+    grh.get(1).setLocation(10,10);
+    System.out.println(grh.toString());
   }
   //public static void main(String[] args) {
   //  Ficha2.ficha2 ficha2 = new Ficha2.ficha2();
