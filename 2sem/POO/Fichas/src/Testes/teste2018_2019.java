@@ -170,7 +170,48 @@ public class teste2018_2019 {
         public double precoDia3() {
           return super.getPrecoBase() * (0.5*factorQualidade + 0.5*espessuraParede);
         }
+        public class Imovel{
 
+        }
+        public class ImovelJaExiste extends Exception{
+          public ImovelJaExiste(String e) {
+            super(e);
+          }
+        }
+        //
+        public void insereImovel(Imovel i) throws ImovelJaExiste{
+          // ir buscar
+          // se ja existir lancar excepcao
+          // senao adicionar
+
+          //if( this.lista_de_coisa.get(i.getCode())!=null  )
+          //  throw new ImovelJaExiste("Ja existe um codigo");
+          //this.lista_de_coisas.put(codigo, i.clone());
+        }
+
+        //public double valorTotalAluguerCliente(String codCliente) {
+        //  double r = 0.0;
+        //  if(clientes.containsKey(codCliente)) {
+        //    r = clientes.values()
+        //        .stream()
+        //        .map(Cliente::getMeusAlugueres)
+        //        .flatMap(List::stream)
+        //        .mapToDouble(c -> imoveis.get(c.getCodImovel()).precoDia()*Days.between(c.getInicio(),c.getFim()))
+        //        .sum();
+        //  }
+
+        //  return r;
+        //}
+
+        //// (e)
+        //public Map<String, Set<String>> clientesPorImovel() {
+        //  return clientes.values()
+        //      .stream()
+        //      .map(Cliente::getMeusAlugueres)
+        //      .flatMap(List::stream)
+        //      .collect(
+        //          groupingBy(Aluguer::getCodImovel, mapping(Aluguer::getCodCliente, toSet())));
+        //}
       }
     }
   }
