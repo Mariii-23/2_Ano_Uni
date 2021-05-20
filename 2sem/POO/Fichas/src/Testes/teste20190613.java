@@ -1,8 +1,6 @@
 package Fichas.src.Testes;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -235,11 +233,12 @@ public class teste20190613 {
           lista = ola;
         }
       }
+
       public GrowingArrayOfActividade toInput(String name) throws Exception{
         GrowingArrayOfActividade result = null;
-          ObjectInputStream is = new ObjectInputStream(new FileInputStream(name));
-          result = (GrowingArrayOfActividade) is.readObject();
-          is.close();
+        ObjectInputStream is = new ObjectInputStream(new FileInputStream(name));
+        result = (GrowingArrayOfActividade) is.readObject();
+        is.close();
         return result;
       }
     }
