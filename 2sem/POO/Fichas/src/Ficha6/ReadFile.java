@@ -23,12 +23,11 @@ public class ReadFile {
     oos.close();
   }
 
-  public DriveIt carregaEstado(String filename) throws IOException {
+  public DriveIt carregaEstado(String filename) throws IOException, Exception {
     DriveIt self = new DriveIt();
-    FileOutputStream fos = new FileOutputStream(filename);
-    ObjectOutputStream oos = new ObjectOutputStream(fos);
-    // coisas
-    oos.flush();
+    FileInputStream fos = new FileInputStream(filename);
+    ObjectInputStream oos = new ObjectInputStream(fos);
+    self = (DriveIt) oos.readObject();
     oos.close();
     return self;
   }
