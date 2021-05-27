@@ -18,7 +18,7 @@ void tratamento_ctrl_c(int signum) {
 void tratamento_alarme(int signum) {
   seconds++;
   alarm(1);
-  printf("Alarme\n");
+  printf("Alarme: %d\n", seconds);
 }
 
 void tratamento_ctrl_barra(int singum) {
@@ -101,12 +101,12 @@ int ex2(char *search, char *filenames[], int N) {
 
 int main(void) {
   /* printf("%d\n", ola); */
-  /* ex1(); */
-  char *filenames[] = {"guiao.c", "ola.txt", "nada_aqui.txt"};
-  int N = 3;
+  ex1();
+  /* char *filenames[] = {"guiao.c", "ola.txt", "nada_aqui.txt"}; */
+  /* int N = 3; */
 
-  int resul = ex2("if", filenames, N);
-  printf("\nEncountrou palavra em %d files\n", resul);
+  /* int resul = ex2("if", filenames, N); */
+  /* printf("\nEncountrou palavra em %d files\n", resul); */
 
   return 0;
 }
