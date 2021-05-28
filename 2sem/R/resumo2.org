@@ -87,13 +87,13 @@ a<-matrix(1:12, nrow =3, ncol=4, byrow=TRUE)
 
  #+RESULTS:
 
- [1]  3 12 21 30
+ |[1] | 3 |12 |21 |30|
 
-     row col
- v3   3   1
- v3   3   4
- v3   3   7
- v3   3  10
+|    | row | col |
+| v3 |   3 |   1 |
+| v3 |   3 |   4 |
+| v3 |   3 |   7 |
+| v3 |   3 | 10  |
 
 + Somar linhas e colunas
  #+begin_src r
@@ -109,14 +109,14 @@ a<-matrix(1:12, nrow =3, ncol=4, byrow=TRUE)
 
  #+RESULTS:
     
-   v1  v2  v3
-  109   8  NA
+ | v1 | v2  |v3 |
+ | 109 |  8|  NA|
 
-   v1  v2  v3
-  109   8  NA
+ | v1 | v2  |v3|
+ | 109 |  8 | NA|
   
-   v1  v2  v3
-  109   8   1
+ | v1 | v2 | v3|
+ | 109 |  8 |  1|
 *** Atribuir Nome colunas e linhas
 #+begin_src r
 ## Colunas
@@ -125,23 +125,23 @@ colnames(mat2)<-c("col1","col2","col3")
 rownames(mat1)<-c("col1","col2","col3")
 #+end_src
 
-      col1 col2 col3
- [1,]    9   -4   NA
- [2,]   10    3    1
- [3,]    4    1    0
- [4,]   17    5   NA
- [5,]    6    5    0
- [6,]   16    4    0
- [7,]   12   -4   NA
- [8,]    1    1    0
- [9,]   15   -1    0
-[10,]   19   -2   NA
+|       | col1 | col2    | col3 |
+| [1,]  |    9 | -4  | NA |
+| [2,]  |   10 | 3   | 1  |
+| [3,]  |    4 | 1   | 0  |
+| [4,]  |   17 | 5   |NA  |
+| [5,]  |    6 | 5   | 0  |
+| [6,]  |   16 | 4   | 0  |
+| [7,]  |   12 | -4  | NA |
+| [8,]  |    1 | 1   | 0  |
+| [9,]  |   15 | -1  |  0 |
+| [10,] |   19 | -2  | NA |
 
 
-     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
-col1    9   10    4   17    6   16   12    1   15    19
-col2   -4    3    1    5    5    4   -4    1   -1    -2
-col3   NA    1    0   NA    0    0   NA    0    0    NA
+| [,1] | [,2] | [,3] | [,4] | [,5] | [,6] | [,7] | [,8] | [,9] | [,10] |    |
+| col1 |    9 |   10 |    4 |   17 |    6 |   16 |   12 |    1 |    15 | 19 |
+| col2 |   -4 |    3 |    1 |    5 |    5 |    4 |   -4 |    1 |    -1 | -2 |
+| col3 |   NA |    1 |    0 |   NA |    0 |    0 |   NA |    0 |     0 | NA |
 
 +   É possível ter acesso aos elementos de uma matrix a partir do nome dado a uma linha ou coluna.
     #+begin_src r
