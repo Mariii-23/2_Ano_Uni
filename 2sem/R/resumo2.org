@@ -14,23 +14,23 @@ typeof(mat)
 #+end_src
 
 + Com valores
-#+begin_src r
-a<-matrix(1:12, nrow =3, ncol=4)
-#+end_src
+    #+begin_src r
+    a<-matrix(1:12, nrow =3, ncol=4)
+    #+end_src
 
-     [,1] [,2] [,3] [,4]
-[1,]    1    4    7   10
-[2,]    2    5    8   11
-[3,]    3    6    9   12
+    |      | [,1] | [,2] | [,3] | [,4] |
+    | [1,] |    1 |    4 |    7 |   10 |
+    | [2,] |    2 |    5 |    8 |   11 |
+    | [3,] |    3 |    6 |    9 |   12 |
 
-#+begin_src r
-a<-matrix(1:12, nrow =3, ncol=4, byrow=TRUE)
-#+end_src
+    #+begin_src r
+    a<-matrix(1:12, nrow =3, ncol=4, byrow=TRUE)
+    #+end_src
 
-     [,1] [,2] [,3] [,4]
-[1,]    1    2    3    4
-[2,]    5    6    7    8
-[3,]    9   10   11   12
+    |      | [,1] | [,2] | [,3] | [,4] |
+    | [1,] |    1 |    4 |    7 |   10 |
+    |[2,] |   2   | 5   | 8  | 11|
+    |[3,] |   3   | 6   | 9  | 12|
 ** Indexação
 + Devolve o elemento de A na linha x coluna y
   A[x,y]
@@ -88,12 +88,12 @@ a<-matrix(1:12, nrow =3, ncol=4, byrow=TRUE)
  #+RESULTS:
 
  |[1] | 3 |12 |21 |30|
-
-|    | row | col |
-| v3 |   3 |   1 |
-| v3 |   3 |   4 |
-| v3 |   3 |   7 |
-| v3 |   3 | 10  |
+: which(is.na(mat1),arr.ind=T)
+ |    | row | col |
+ | v3 |   3 |   1 |
+ | v3 |   3 |   4 |
+ | v3 |   3 |   7 |
+ | v3 |   3 |  10 |
 
 + Somar linhas e colunas
  #+begin_src r
@@ -138,18 +138,253 @@ rownames(mat1)<-c("col1","col2","col3")
 | [10,] |   19 | -2  | NA |
 
 
-| [,1] | [,2] | [,3] | [,4] | [,5] | [,6] | [,7] | [,8] | [,9] | [,10] |    |
-| col1 |    9 |   10 |    4 |   17 |    6 |   16 |   12 |    1 |    15 | 19 |
-| col2 |   -4 |    3 |    1 |    5 |    5 |    4 |   -4 |    1 |    -1 | -2 |
-| col3 |   NA |    1 |    0 |   NA |    0 |    0 |   NA |    0 |     0 | NA |
+|      | [,1] | [,2] | [,3] | [,4] | [,5] | [,6] | [,7] | [,8] | [,9] | [,10] |
+| col1 |    9 |   10 |    4 |   17 |    6 |   16 |   12 |    1 |   15 |    19 |
+| col2 |   -4 |    3 |    1 |    5 |    5 |    4 |   -4 |    1 |   -1 |    -2 |
+| col3 |   NA |    1 |    0 |   NA |    0 |    0 |   NA |    0 |    0 |    NA |
 
 +   É possível ter acesso aos elementos de uma matrix a partir do nome dado a uma linha ou coluna.
     #+begin_src r
     mat2[2,"col3"]
     #+end_src
 
-    col3
-       1
+   | col3 |
+   |    1 |
 *** Operações Aritméticas
 As operações aritmétiocas são efetuadas elemento a elemento.
-#+NOTA: O produto de matrixes não é definido como o produto elemento a elemento, pelo que se usa o operado "%*%" para o produto matricial.
+O produto de matrixes não é definido como o produto elemento a elemento, pelo que se usa o operado "%*%" para o produto matricial. (O mesmo se aplica ao operado "/")
+
+#+begin_src r
+set.seed(12234)
+rend_anual_ano1<- sample(200:300,5)
+rend_anual_ano2<- sample(200:300,5)
+rend_anual_ano3<- sample(200:300,5)
+rend_anual_ano4<- sample(200:300,5)
+rend_anual_ano5<- sample(200:300,5)
+
+matA<-rbind(rend_anual_ano1,rend_anual_ano2,rend_anual_ano3,rend_anual_ano4,rend_anual_ano5)
+
+desp_ed_ano1<- sample(0:10,5)
+desp_ed_ano2<- sample(0:10,5)
+desp_ed_ano3<- sample(0:10,5)
+desp_ed_ano4<- sample(0:10,5)
+desp_ed_ano5<- sample(0:10,5)
+
+matB<-rbind(desp_ed_ano1,desp_ed_ano2,desp_ed_ano3,desp_ed_ano4,desp_ed_ano5)
+
+rownames(matB)<-c("fam1","fam2","fam3","fam4","fam5")
+
+round(matB/matA *100,3)
+## o 3 representa as casas decimais a apresentar
+#+end_src
+
+: matA
+|                 | [,1] | [,2] | [,3] | [,4] | [,5] |
+| rend_anual_ano1 |  293 |  261 |  267 |  295 |  260 |
+| rend_anual_ano2 |  257 |  248 |  231 |  215 |  275 |
+| rend_anual_ano3 |  264 |  246 |  278 |  228 |  230 |
+| rend_anual_ano4 |  231 |  268 |  260 |  298 |  243 |
+| rend_anual_ano5 |  221 |  230 |  209 |  257 |  217 |
+
+: matB
+|   | [,1] | [,2] | [,3] | [,4] | [,5] |
+|desp_ed_ano1 |  10 |   4|    1 |   8 |   7|
+|desp_ed_ano2 |   7 |  10|    6 |   4 |   8|
+|desp_ed_ano3 |   9 |   7|    5 |   3 |   1|
+|desp_ed_ano4 |   4 |   5|    8 |   9 |   3|
+|desp_ed_ano5 |   7 |   6|    2 |   0 |   4|
+
+: round
+|   | [,1] | [,2] | [,3] | [,4] | [,5] |
+|fam1| 3.413| 1.533| 0.375 |2.712 |2.692|
+|fam2| 2.724| 4.032| 2.597 |1.860 |2.909|
+|fam3| 3.409| 2.846| 1.799 |1.316 |0.435|
+|fam4| 1.732| 1.866| 3.077 |3.020 |1.235|
+|fam5| 3.167| 2.609| 0.957 |0.000 |1.843|
+
+*** Somatórios duplos
+O somatório duplo \sum_{i=1}^{n} \sum_{j=1}^{m} corresponde à soma das entradas da matriz n × m
+
++   \sum_{i=1}^{10} \sum_{j=1}^{20}(i+j)
+ #+begin_src r
+ (a<-outer(1:10,1:20,"+"))
+ sum(a)
+ #+end_src
+
+ | [1] | 3200 |
+
++   \sum_{i=1}^{10} \sum_{j=1}^{20}(3i+j)
+
+ #+begin_src r
+ (a<-outer(1:10,1:20,function(i,j){3*i+j}))
+ sum(a)
+ #+end_src
+
+ | [1] | 5400 |
+
++   \sum_{i=1}^{10} \sum_{j=1}^{20} (i<j)/(i+j)
+
+ #+begin_src r
+ (Bb<- outer  (1:20 ,  1:10 ,  function ( i ,  j )  {( i < j ) / ( i+j ) })  )
+ sum(Bb)
+ #+end_src
+
+ | [1] | 4.825374 |
+
+*** Funções da família apply()
+A função tem três argumentos: o primeiro é o array, o segundo é a margem do array sobre a qual queremos operar e o terceiro é a função a aplicar à margem. Se a margem for um vetor, como na caso das matrizes, a função deve ter como argumento principal um vetor. Os outros argumentos da função, se existirem, podem ser passados a seguir.
+
++ Calcular o máximo das linhas de mat1
+ #+begin_src r
+ apply(mat1,1,max,na.rm=T)
+ #+end_src
+
+ |col1 |col2 |col3|
+ | 19  |  5  |  1 |
+** Fatores
+
++ Os fatores podem ser armazenados de forma muito eficiente com fácil verificação de dados – se se tentaratribuir um valor a um fator que não está incluído numa das suas categorias ou níveis (levels), o Rautomaticamente gera um aviso.
+    #+begin_src R
+    corCabelo<-factor(c("azul","castanho","amarelo","verde","azul","amarelo"))
+    table(corCabelo)
+    #+end_src
+
+    #+RESULTS:
+    | amarelo  | 2 |
+    | azul     | 2 |
+    | castanho | 1 |
+    | verde    | 1 |
+
++ Quando os dados são ordinais, não basta passar o argumento "ordered" com a flag TRUE, pois a ordem lexicografica é assumida por defeito.
+
+    #+begin_src R
+    corCabelo<-factor(c("azul","castanho","amarelo","verde","azul","amarelo"),ordered=T)
+    corCabelo
+    #+end_src
+
+    #+RESULTS:
+|[1]| azul    | castanho |amarelo | verde |   azul |    amarelo|
+: Levels: amarelo < azul < castanho < verde
+
+** Dados Retangulares
+Ao contrário de uma matriz, as colunas não têm que ser todas da mesma classe e tipo. As colunas podemser objetos de classes diferente, desde que o seu comprimento (ou dimensão) sejam compatíveis.
+
+Algumas funcoes:
+ + dim() -> dimensao
+ + str() -> algumas informações
+ + head()
+ + tail()
+
+*** Definir um data.frame
+#+begin_src R
+nomesI<-letters[1:5]
+nomesF<-LETTERS[22:26]
+
+numA<-sample(1:20,5)
+numB<-sample(1:20,5)
+numC<-sample(1:20,5)
+
+my_df<-data.frame(varA=nomesI,varB=nomesF,colA=numA,colB=numB,colC=numC)
+#+end_src
+
+#+RESULTS:
+|   | varA | varB | colA | colB | colC |
+| 1 | a    | V    |    7 |    2 |    2 |
+| 2 | b    | W    |   13 |   16 |   15 |
+| 3 | c    | X    |    5 |   15 |    5 |
+| 4 | d    | Y    |   16 |    3 |   16 |
+| 5 | e    | Z    |    6 |    6 |   20 |
+** Listas
+Uma lista é uma estrutura de dados unidimensional que permite armazenar dados diferentes em cada um dos seus componentes.
+
+#+begin_src R
+vet<-1:10
+mat<-matrix(1:10,2,5)
+df<-mtcars
+lista<-list(v=vet,matrix=mat,dframe=df)
+#+end_src
+: $v
+ | [1] | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+
+: $matrix
+|   | [,1] | [,2] | [,3] | [,4] | [,5] |
+|[1,] |   1|    3|    5 |   7 |   9|
+|[2,] |   2|    4|    6 |   8 |  10|
+
+: $dframe
+|   | mpg | cyl | disp | hp | drat | wt | qsec | vs | am | gear | carb |
+|Mazda RX4          | 21.0|   6| 160.0| 110| 3.90| 2.620| 16.46|  0|  1|    4 |   4|
+|Mazda RX4 Wag      | 21.0|   6| 160.0| 110| 3.90| 2.875| 17.02|  0|  1|    4 |   4|
+|Datsun 710         | 22.8|   4| 108.0|  93| 3.85| 2.320| 18.61|  1|  1|    4 |   1|
+|Hornet 4 Drive     | 21.4|   6| 258.0| 110| 3.08| 3.215| 19.44|  1|  0|    3 |   1|
+|Hornet Sportabout  | 18.7|   8| 360.0| 175| 3.15| 3.440| 17.02|  0|  0|    3 |   2|
+|Valiant            | 18.1|   6| 225.0| 105| 2.76| 3.460| 20.22|  1|  0|    3 |   1|
+|Duster 360         | 14.3|   8| 360.0| 245| 3.21| 3.570| 15.84|  0|  0|    3 |   4|
+|Merc 240D          | 24.4|   4| 146.7|  62| 3.69| 3.190| 20.00|  1|  0|    4 |   2|
+|Merc 230           | 22.8|   4| 140.8|  95| 3.92| 3.150| 22.90|  1|  0|    4 |   2|
+|Merc 280           | 19.2|   6| 167.6| 123| 3.92| 3.440| 18.30|  1|  0|    4 |   4|
+|Merc 280C          | 17.8|   6| 167.6| 123| 3.92| 3.440| 18.90|  1|  0|    4 |   4|
+|Merc 450SE         | 16.4|   8| 275.8| 180| 3.07| 4.070| 17.40|  0|  0|    3 |   3|
+|Merc 450SL         | 17.3|   8| 275.8| 180| 3.07| 3.730| 17.60|  0|  0|    3 |   3|
+|Merc 450SLC        | 15.2|   8| 275.8| 180| 3.07| 3.780| 18.00|  0|  0|    3 |   3|
+|Cadillac Fleetwood | 10.4|   8| 472.0| 205| 2.93| 5.250| 17.98|  0|  0|    3 |   4|
+|Lincoln Continental| 10.4|   8| 460.0| 215| 3.00| 5.424| 17.82|  0|  0|    3 |   4|
+|Chrysler Imperial  | 14.7|   8| 440.0| 230| 3.23| 5.345| 17.42|  0|  0|    3 |   4|
+|Fiat 128           | 32.4|   4|  78.7|  66| 4.08| 2.200| 19.47|  1|  1|    4 |   1|
+|Honda Civic        | 30.4|   4|  75.7|  52| 4.93| 1.615| 18.52|  1|  1|    4 |   2|
+|Toyota Corolla     | 33.9|   4|  71.1|  65| 4.22| 1.835| 19.90|  1|  1|    4 |   1|
+|Toyota Corona      | 21.5|   4| 120.1|  97| 3.70| 2.465| 20.01|  1|  0|    3 |   1|
+|Dodge Challenger   | 15.5|   8| 318.0| 150| 2.76| 3.520| 16.87|  0|  0|    3 |   2|
+|AMC Javelin        | 15.2|   8| 304.0| 150| 3.15| 3.435| 17.30|  0|  0|    3 |   2|
+|Camaro Z28         | 13.3|   8| 350.0| 245| 3.73| 3.840| 15.41|  0|  0|    3 |   4|
+|Pontiac Firebird   | 19.2|   8| 400.0| 175| 3.08| 3.845| 17.05|  0|  0|    3 |   2|
+|Fiat X1-9          | 27.3|   4|  79.0|  66| 4.08| 1.935| 18.90|  1|  1|    4 |   1|
+|Porsche 914-2      | 26.0|   4| 120.3|  91| 4.43| 2.140| 16.70|  0|  1|    5 |   2|
+|Lotus Europa       | 30.4|   4|  95.1| 113| 3.77| 1.513| 16.90|  1|  1|    5 |   2|
+|Ford Pantera L     | 15.8|   8| 351.0| 264| 4.22| 3.170| 14.50|  0|  1|    5 |   4|
+|Ferrari Dino       | 19.7|   6| 145.0| 175| 3.62| 2.770| 15.50|  0|  1|    5 |   6|
+|Maserati Bora      | 15.0|   8| 301.0| 335| 3.54| 3.570| 14.60|  0|  1|    5 |   8|
+|Volvo 142E         | 21.4|   4| 121.0| 109| 4.11| 2.780| 18.60|  1|  1|    4 |   2|
+
+Se usar a notação [] (tal como se faz com vetores) para aceder aos componentes de uma lista, o objeto que se obtém é da classe **list**. Usar a notação [[]] ou $ permite aceder diretamente ao objeto componente da lista.
+#+begin_src R
+lista[1]
+lista[[1]]
+lista$v
+
+class(lista[1]);
+class(lista[[1]]);
+class(lista$v);
+#+end_src
+
+: $v
+ | [1] | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+: apenas valores
+ | [1] | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+: apenas valores
+ | [1] | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+: [1] "list"
+: [1] "integer"
+: [1] "integer"
+
+#+begin_src r
+lista1<-list(list(1,2),c(3,4))
+str(lista1)
+
+lista2<-c(list(1,2),c(3,4))
+str(lista2)
+#+end_src
+
+: List of 2
+: $ :List of 2
+:  ..$ : num 1
+:  ..$ : num 2
+: $ : num [1:2] 3 4
+
+: List of 4
+:  $ : num 1
+:  $ : num 2
+:  $ : num 3
+:  $ : num 4
+
+É possível transformar uma lista num vetor numérico usando **unlist()**

@@ -1,15 +1,44 @@
-set.seed(12234)
+## 6.4 Exercicios
+##
 
-v1<-sample(1:24,10)
-v2<-sample(-8:8,10,replace=T)
-v3<-sample(c(NA,0,1),10,replace=T)
+## 1.
 
-## linha1->v1
-## linha2->v2
-## linha3->v3
-mat1<-rbind(v1,v2,v3)
+ex1<-data.frame()
 
-## coluna1->v1
-## coluna2->v2
-## coluna3->v3
-mat2<-cbind(v1,v2,v3)
+## 2.
+## a)
+summary(iris)
+
+## b)
+## Subset
+vers2<-subset(iris,iris$Species == "versicolor")
+vers2[,-5]
+
+## Indexação
+vers<-iris[iris$Species == "versicolor",-5]
+
+## c
+## for
+forVersao<-function(){
+    v1<-c()
+    for(linhas in 1:nrow(vers)){
+       v1<-append(v1,0)
+       for(colunas in 1:ncol(vers)){
+             (v1[linhas] <- v1[linhas] + vers[linhas,colunas])
+       }
+    }
+    v1
+}
+v2<-forVersao()
+
+## Soma todas as linhas
+v<-apply(vers,1,sum)
+
+## d
+## Devolve a media de cada coluna
+d<-apply(vers,2,mean)
+
+d1<-colMeans(vers, na.rm = FALSE, dims = 1)
+
+## e
+d<-apply(vers[,-5],2,function(x) sum(x>5))
