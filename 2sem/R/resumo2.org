@@ -388,3 +388,15 @@ str(lista2)
 :  $ : num 4
 
 É possível transformar uma lista num vetor numérico usando **unlist()**
+** Funções de agrupamento tapply( ), aggregate( )e by()
++ tapply()
+    Por exemplo, tem-se de seguida o valor da mediana de em cada subconjunto de observações relativas aocomprimento da face,FL, determinados pelo cruzamento dos fatoressex(sexo) esp(espécie) dos dadoscrabs(caranguejos).
+    #+begin_src r
+    library(MASS)
+    tapply(crabs$FL, list(crabs$sex,crabs$sp),median)
+    #+end_src
+
+    |   |     B |    O |
+    | F | 13.15 | 18.0 |
+    | M | 15.10 | 16.7 |
++ Se pretender aplicar uma função (neste casomedian, a todas as colunas do data frame, tem que usaraggregate( )ouby( ). As duas funções devolvem a mesma informação, estando a diferença destas duasfunções no output produzido
