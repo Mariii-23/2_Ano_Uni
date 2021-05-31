@@ -42,3 +42,31 @@ d1<-colMeans(vers, na.rm = FALSE, dims = 1)
 
 ## e
 d<-apply(vers[,-5],2,function(x) sum(x>5))
+
+## 6.6.1
+
+## 1
+myLst <- function(n) {
+  x <- rnorm(n)
+  medx <- median(x)
+  if (medx >= 0) {
+    y <- rexp(n, rate = 1/medx)
+  } else {
+    y <- -rexp(n, rate = 1/-medx)
+  }
+  k <-sum(abs(y) > abs(x))
+  list(vetx = x, vety = y, conta = k)
+}
+
+myLst(10)
+
+lapply(rep(10, 4), myLst)
+sapply(rep(10, 4), myLst)
+replicate(4, myLst(10), simplify = T)
+replicate(4, myLst(10), simplify = F)
+
+
+negativos<-function(x){
+  which(ola<0,arr.ind=T)
+  sum(apply(ola,1,function(x) sum(x<0)))
+}

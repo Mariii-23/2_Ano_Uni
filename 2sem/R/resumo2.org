@@ -400,3 +400,43 @@ str(lista2)
     | F | 13.15 | 18.0 |
     | M | 15.10 | 16.7 |
 + Se pretender aplicar uma função (neste casomedian, a todas as colunas do data frame, tem que usaraggregate( )ouby( ). As duas funções devolvem a mesma informação, estando a diferença destas duasfunções no output produzido
+
+  
+** outras funcoes
+    + outer()
+** Graficos
+#+begin_src R
+library(ggplot2)
+movies <- read.csv("MovieRatings.csv")
+
+###### plots
+
+################# ggplot() ? a main para constru??ao de gr?ficos
+
+##### constiu?da por layers (camadas)
+
+##### primeira camada: dados
+### segunda camada: aes() eixos, cor, fill, size,.... (things we see)
+#### terceira camada: geometria
+
+
+##### grafico de barras para vari?veis categ?ricas
+
+ggplot(movies, aes(x = Genre, fill = Year.of.release)) + 
+  geom_bar(position = "stack")
+
+ggplot(movies, aes(x = Genre, fill = Year.of.release)) +
+  geom_bar(position = "dodge")
+
+#### gr?fico cruzamento de vari?veis quantitativas e um fator (bolinhas)
+
+ggplot(movies, aes(x = Audience.Ratings.., y = Rotten.Tomatoes.Ratings.., color = Genre, size = Budget..million...)) +
+geom_point()
+
+#### outro tipo de grafico
+q <- ggplot(movies, aes(x = Audience.Ratings.., y = Budget..million...))
+q + geom_point() + geom_smooth()
+
+q + geom_point() + geom_smooth(fill=NA)
+
+#+end_src
