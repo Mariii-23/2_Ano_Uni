@@ -1,7 +1,5 @@
-outer(1:20, 1:10, function(i,j) {(i-1) + ((j-1)/9)})
+## TESTE 2
 
-
-##
 ## pergunta 1
 outer(1:20, 1:12, function(i, j){(i + 1)*j/(j^2 - (1/2))})
 
@@ -39,8 +37,10 @@ iris[sample(1:150, 10),]
 set.seed(1789)
 (matM <- matrix(sample(c(0, 1, NA), 30, prob = c(0.4, 0.4, 0.2), replace = T), nc = 5))#
 
-linhas<-apply(matM,1,function(x) sum(which(x==1)*0+1))
-colunas<-apply(matM,2,function(x) sum(which(x==1)*0+1))
+## linhas<-apply(matM,1,function(x) sum(which(x==1)*0+1))
+linhas<-rowSums(matM==1,na.rm=T)
+## colunas<-apply(matM,2,function(x) sum(which(x==1)*0+1))
+colunas<-colSums(matM==1,na.rm=T)
 
 linhas;colunas
 
@@ -73,9 +73,12 @@ linhas<-nrow( mtcars[mtcars$mpg> mean(mtcars$mpg),])
 ##
 
 ## pergunta 15
-aux<-0
-for( i in 1:5){ (for(j in (i+1):50){ aux<- aux + 2/(1+i*j) })}
-aux
+f<-function(){
+  aux<-0
+  for( i in 1:5){ (for(j in (i+1):50){ aux<- aux + 2/(1+i*j) })}
+  aux
+}
+f()
 
 ## pergunta 16
 linhas<-apply(matM,1,function(x) sum(which(x==1)*0+1))

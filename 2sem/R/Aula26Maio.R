@@ -30,23 +30,32 @@ str(crabs)
 
 library(ggplot2)
 
+# histrograma bd e count
 pl <- ggplot(crabs, aes(x = BD))
 pl + geom_histogram(binwidth = 0.5, color="white", fill="green", alpha = 0.5)
 
+#histrogram com 2 analises entre o sexo
 pl1 <- ggplot(crabs, aes(x = BD, color = sex))
 pl1 + geom_histogram(binwidth = 0.5, fill="white")
 
+#histrogram com 2 analises entre o sexo
 pl1 <- ggplot(crabs, aes(x = BD, fill = sex))
 pl1 + geom_histogram(binwidth = 0.5, color="white")
 
+#histrogram com 2 analises entre o sexo, lado a lado
 pl1 + geom_histogram(binwidth = 0.5, color="white", alpha = 0.5, position = "dodge")
 
 
-
+pl5 <- ggplot(crabs, aes(BD))
+pl5+geom_histogram(binwidth = 0.5, color="white", fill="green", alpha = 0.5)
+  
+  
+#histrogram entre 2 com reta
 pl5 <- ggplot(crabs, aes(x = BD, y = ..density..))
 pl5 + geom_histogram(binwidth = 0.5, color="white", fill="green", alpha = 0.5)+
   geom_density(fill = "red", alpha = 0.4)
 
+#histrogram entre 2 com reta sem coisa em baixo
 pl5 + geom_histogram(binwidth = 0.5, color="white", fill="green", alpha = 0.5)+
   geom_density(color = "red")
 
@@ -59,7 +68,7 @@ ggplot(crabs, aes(x = BD)) +
   geom_histogram(color="black", fill = "white") +
   facet_grid(sex~.)
 
-
+# 2 coisas , mais algo separado
 ggplot(crabs, aes(x = BD)) +
   geom_histogram(binwidth = 0.5, color="white", fill = "red", alpha=0.4) +
   facet_grid(sp~.)

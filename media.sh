@@ -22,11 +22,11 @@ echo "
 18, 1.0, Introduçãaos Sistemas Dinâmicos
 
 00, 2.0, Cálculo de Programas
-00, 1.5, Eletromagnetismo EE
+11, 1.5, Eletromagnetismo EE
 00, 2.0, Laboratórios de Informática III
-00, 1.0, Opção UMinho
+19, 1.0, Opção UMinho
 00, 1.0, Programação Orientada aos Objetos
-00, 2.0, Sistemas Operativos
+16, 2.0, Sistemas Operativos
 
 00, 2.0, Bases de Dados
 00, 2.0, Desenvolvimento de Sistemas de Software

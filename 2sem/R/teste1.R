@@ -30,7 +30,7 @@ apply(aux, nrow=5),1,mean)
 ## pergunta 7
 summary(Arrests)
 
-## pergunta 8
+## pergunta 8 ??
 ## list(1:3) -> contem 1 elemento ﻿﻿﻿﻿﻿apenas, com 1 array de 3 elementos (numeros)﻿
 ## as.list(1:3)﻿﻿﻿﻿﻿﻿﻿-> contem 3 elementos, com cada 1 um elemento (numero)﻿﻿﻿﻿﻿﻿﻿﻿﻿
 
