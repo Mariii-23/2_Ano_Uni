@@ -19,14 +19,14 @@ echo "
 14, 2.0, Comunicação de Dados
 15, 1.5, Engenharia Económica
 13, 1.5, Estatística Aplicada
-18, 1.0, Introduçãaos Sistemas Dinâmicos
+18, 1.0, Introdução aos Sistemas Dinâmicos
 
-00, 2.0, Cálculo de Programas
+15, 2.0, Cálculo de Programas
 11, 1.5, Eletromagnetismo EE
-00, 2.0, Laboratórios de Informática III
+20, 2.0, Laboratórios de Informática III
 19, 1.0, Opção UMinho
 00, 1.0, Programação Orientada aos Objetos
-16, 2.0, Sistemas Operativos
+17, 2.0, Sistemas Operativos
 
 00, 2.0, Bases de Dados
 00, 2.0, Desenvolvimento de Sistemas de Software
